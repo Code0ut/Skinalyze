@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Temporary</title>
+    <script>
+        function regi(){
+            window.location.href = "{{ url_for('register') }}";
+        }
+        function log(){
+            window.location.href = "{{ url_for('login') }}";
+        }
+    </script>
+</head>
+<body>
+<button onclick="regi()">Register</button>
+<button onclick="log()">Login</button>
+</body>
+</html>
