@@ -21,7 +21,7 @@ def load_user(user_id):
 
 @app.route("/")
 def index():
-    return render_template("register_login.html")
+    return render_template("dashboard.html")
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm()
