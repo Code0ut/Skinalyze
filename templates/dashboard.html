@@ -1,283 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skinalyze</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Apply background to the whole body */
-        *{
-          box-sizing: border-box;
-        }
-        
-        body {
-            
-           
-           
-            font-family: "Oswald", sans-serif;
-            color: rgb(0, 0, 0);
-            margin: 0;
-            padding: 0;
-            height: 1500px;
-            background-color:white;
-            
-            
-        }
-
-        /* Navigation Bar */
-        .navbar {
-         
-         display: flex;
-          width: 100%;
-          height: 81px;
-          align-items: center;
-          padding: 0 50px;
-          background: rgba(238, 127, 127, 0.3);
-          backdrop-filter: blur(10px);
-          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-          border-radius: 17px;
-          
-        }
-
-        #logo {
-            font-family: "Lobster", serif;
-            font-size: 20px;
-            color: rgb(30, 27, 24);
-            text-align: center;
-        }
-
-        .box {
-         
-          color: #000000;
-	    border-radius: 10px;
-	    font-size:x-large;
-	    font-weight: bolder;
-	    padding: 4px 19px;
-	    cursor: pointer;
-	    transition: all 0.3sease -in-out;
-	    margin: 47px;
-	    position: relative;
-	    left: 170px;}
-      
-      a{
-        text-decoration: none;
-        color: #000000;
-      }
-
-
-        
-
-        .box:hover {
-            background-color: rgb(212, 54, 86);
-            color: rgb(255, 255, 255);
-        }
-
-        /* Main Section with Image */
-       
-        
-        
-
-        .left-image {
-            width: 37%;
-            max-width: 500px;
-            position: relative;
-           bottom: 12px;
-           left: 12px;
-        }
-        .text-container img{
-          width: 80px;
-        }
-        
-
-        .text-container { 
-        width: 50%;
-        background-color:rgba(0, 0, 0, 0.3);
-        text-align: center;
-        border-radius: 10px;
-        
-        
-       
-}
-      .content-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 600px;
-        width: 100%;
-        background-image: url('https://media-hosting.imagekit.io//85094d52114346be/screenshot_1740142633500.png?Expires=1834750641&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=m3RigG6-AHgrFcJYlLW33zElgmjcmXwom2QyPeF-1qo~eNpd42xmCCdyGBm6qWRKR7sIM1j53bvIOzuhM9zWJYxx2Mxdi2Hf-GtkAHWzmDJw50aVWhMOXY-GNBFDdHTgbScwh2d8YkrwSwR4ch9VqzqPpw1BNOVhAsZJHpRVc9UybNHyh6ct0ObUmaiqe3U9zlnBAgl16pXGhgEh4udat2l~LtlWuo8J3vx3m7DaVfJK3nwsDUZdD5SQx0EbpM4bHdGP6DBC7vxsurzoHIbvSDxJejCqK~yUsYeWZcu0bGN~MYlVwWx7oPLwCoNkz0-0DGxyk1aPjoer2GmBAV3VyQ__');
-        background-repeat: no-repeat;
-        background-size: 100%;
-        position: relative;
-        top:15px;
-     
-        
-        
-        
-        
-        
-      }
-
-        .text-container h1 {
-            font-size: 36px;
-            font-weight: bold;
-            color:rgb(255, 255, 255);
-        }
-
-        .text-container p {
-            font-size: 30px;
-            color: rgb(255, 253, 253);
-           
-        }
-
-        /* Button */
-        #btn {
-            background-color: rgba(2, 2, 3);
-            color: rgb(240, 227, 227);
-            font-size: larger;
-            font-weight: bold;
-            font-family: "Oswald", sans-serif;
-            padding: 12px 25px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.3s ease-in-out;
-            position: relative;
-            bottom: 20px;
-        }
-
-        #btn:hover {
-            background-color: rgb(91, 201, 232);
-            color: black;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(195, 25, 25, 0.3);
-            color: white;
-            font-size: 16px;
-            width: 105%;
-        }
-        footer h1{
-          color: #000000;
-        }
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .content-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .left-image, .text-container {
-                width: 90%;
-            }
-        }
-        .services{
-          display: flex;
-         align-items: center;
-         justify-content:center;
-          width: 100%;
-          height: 400px;
-          
-
-        }
-        .services .s1{
-         
-          width: 550px;
-          height: 320px;
-          margin: 90px;
-          background-image: url("https://media-hosting.imagekit.io//79db64d3e90d4bc0/screenshot_1740145331590.png?Expires=1834753339&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=NaTCIyoRa0FPVGvuJXzN8fza2EyiN60M7fNj2OP1lIfoSOURCZyzvwPizO4glZorMmNTOgUGp~2Re1azs14VQxZDBQgoAT-2KYB9M2g5n7ImrbLDDGW4VZnYbi7YaSxuF0S6yurCZFLAgVcb8jpJqA5HV5X5cBzktWm7TV16co9FJ6gEZsdCyQCMf6MsuET49qm827ixRRZmT2x1SvzAE3EpdtVrY70SGKTBGRDQB2J89~ViSMrnZdyb-YzsKa9NQ4VDmfPxHbLnKa9kphfdT324-e9RwS2wjdYcSSUdCzx1avvQwhBuecVAdjlCuTy0fqbEyYSbVCVARSBCeV0ahg__");
-          color: black;
-          font-size: larger;
-          border-radius: 20px;
-        }
-        .services .s2{
-          
-          width: 600px;
-          height: 320px;
-          margin: 90px;
-          background-repeat: no-repeat;
-          background-image: url("https://media-hosting.imagekit.io//22a3b7e4e9004c4b/screenshot_1740145788930.png?Expires=1834753796&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=FsJNimlbCw6bsZFpeAcYpf4DwBXsVaSm06IS509~UTHTqB9teiUIgvRP~7Hr73YVKauUZus9LoIt-Tv7E2Ct84QEnuVn-SpwvYBvi899E1D~xkGVlHw8CfuGln4oz5zmcu8h85f96G0AhXPATz~egA7Ez3slXEg--YRdRjeCWW5pyQ0ykSrsyD3UEQuw7GF1SrURxvaS23kMSedwyIWQNUQfWDhZotQlZ6fXaQR~-V1SVk936uKnIf8Ihaq9EhItp-Qttf4TsE-BKwtS0CNa5xs24txrWSXd9kJkh73EKTqKN-U8C97Qwa-4wKgTMw6wlPZ~Nlt1M4N2QfHWaDT7RA__");
-          border-radius: 20px;
-          font-size: larger;
-          
-        }
-        #base{
-                
-                border: 2px solid purple;
-                background-color: rgb(73, 47, 144);
-                margin-top: 80px;
-                height: 400px;
-                width: 100%;
-                text-align: center;
-                background-image: url("https://media-hosting.imagekit.io//1c2c3c936b0e4e4f/screenshot_1740148716177.png?Expires=1834756724&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=Bm5VKSI0iw-9LXwh4uee84ARsBz5djk--WnRnaEnJhv8Z65xzGwS-cNyB7Ds5sHP-2lezwDYa1LlRWaL0JfiGvGZD6bftsZvc0o92Q7vnO~uaOvOi7lznx7E6G7S4etdL5bwi6KOwx9eJ9BLbyP6uWXnvUz0vjHJfhgLjwdhKya3SALbGaw8~LgU5JG3FTFdy6puu~WDtPY6im5ebs34BkDZrlLHARt4Uo9MMMBWn1Ur7tyyJdKEABS0VyZXtA~FjhtQ7m5FDVmbrdSeIK-aNJ0f19Yyd1wvpL8~hHGpCRekzXuGOE0MxhhxjE~j2sTJsZdI2wLBuMzzB4Qq1z9yTA__");
-                background-repeat: no-repeat;
-                background-size: 400px;
-        }
-        #middle{
-          display: flex;
-          justify-items: center;
-          align-items: center;
-        }
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skinalyze</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">Skinalyze</div>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="loginpage.html">Login</a></li>
+      <li><a href="#">About Us</a></li>
+    </ul>
+  </nav>
 
-    <!-- Navbar -->
-    <header>
-        <div class="navbar">
-             
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero-content">
+      <h1>A Complete Solution for Your Skin Health</h1>
+      <p>Personal skin assistant powered by AI</p>
+      <button class="btn-hero" id="tryNowBtn">Try Now</button>
+    </div>
+  </header>
 
-            <h1>Skinalyze</h1>
-            <div class="box"><a href="#">Home</a></div>
-            <div class="box"><a href="27.0.0.1:5500/Login2.html">Login</a></div>
-            <div class="box"><a href="#"> About Us </a></div>
-            <div class="box"><a href="#"> Sign In </a></div>
-            <div class="box"><a  href="#">Contact Us</a></div>
-        </div>
-    </header>
-
-    <!-- Main Section with Image and Text -->
-  
-    <div class="content-container">
-       <div class="text-container">
-       
-          <img src="https://media-hosting.imagekit.io//fecaf792fcc442e4/screenshot_1739704569932.png?Expires=1834312572&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=JNQoS6kgEf4vmNyA7CcRaiJGgDaFSQca1PYxKQO0rFp3bPrcOeprXoWXYn2j6oohom2FZStCmwkwPZPDQRxqrh~fFdaeTseOGVAyi3-KsfIp5lN-0cPjenWYv4dorGdWkLlYA8w09trqDeIGOLvv7XHEYl3QXes6QJt6id8z0mA0G9k-5fMKZp-T7-xIZtMHlERL0RRU-p10AsE6Lt3K3b9~09KQiYyrnP8F1~SQshTN07F~o2aBLJaAlXi1pceLQSAL0lJW71S8DMHZMBhzF8KmxGUiZNoOFPC4~~eVrTn~Qk0QC405kK36YypnIBImL5Ngm9nezn5iOaZMNmI2zA__";
-           alt="">
-           <h1>WELCOME {{username}}</h1>
-          <h3>A Complete Solution for Your Skin Care Health</h3>
-          <p>Your personal AI-powered skin assistant</p>
-          <button id="btn">Try Now</button>
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <h2>Our services</h2>
+    <div class="feature-cards">
+      <!-- Feature Card 1 -->
+      <div class="feature-card">
+        <img
+          src="https://media-hosting.imagekit.io//9c46eb0cb577460b/screenshot_1740145331590.png?Expires=1835199234&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=VMrFhsXDgyLM8gxwibFT6ANLDtvA1lQ1frwYY2gCziHfVh~SJZ-iT2US3mYNm0UISPetFdXnBuwwiYOhX~oIPT8VmmC8ZWxrHwPgtaFjDc3rO3-Y9Vn9I7B3M-YkPJhGEca87c8ebRxKOtmum9JYbM0FPsE7xTq4J2RDlKwt54cuz2Ja-So~aQnMpPe89MW~IbCevntkA5zrIHLWtz7V-ttoTgJ2cIEYBrQ9rXyHTcj9uwpa5mY0URIIt94qgEOXqvGoMB7d3HntMHJXAKQfP2YfEwLb6-gdwvkDg4vBfNm2xG7KtpRdt5CWo-bL8P4wvtE3Z0XF92DEaWKiiwT~fA__"
+          alt="AI-Generated 1"
+        />
+        <h3>Instant Diagnosis</h3>
+        <p>
+          Get real-time insights into your skin condition with our advanced AI
+          detection system.
+        </p>
       </div>
-  </div>
-        
+      <!-- Feature Card 2 -->
+      <div class="feature-card">
+        <img
+          src="https://media-hosting.imagekit.io//22a3b7e4e9004c4b/screenshot_1740145788930.png?Expires=1834753796&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=FsJNimlbCw6bsZFpeAcYpf4DwBXsVaSm06IS509~UTHTqB9teiUIgvRP~7Hr73YVKauUZus9LoIt-Tv7E2Ct84QEnuVn-SpwvYBvi899E1D~xkGVlHw8CfuGln4oz5zmcu8h85f96G0AhXPATz~egA7Ez3slXEg--YRdRjeCWW5pyQ0ykSrsyD3UEQuw7GF1SrURxvaS23kMSedwyIWQNUQfWDhZotQlZ6fXaQR~-V1SVk936uKnIf8Ihaq9EhItp-Qttf4TsE-BKwtS0CNa5xs24txrWSXd9kJkh73EKTqKN-U8C97Qwa-4wKgTMw6wlPZ~Nlt1M4N2QfHWaDT7RA__"
+          alt="AI-Generated 2" id ="img2"
+        />
+        <h3>Personalized Advice</h3>
+        <p>
+          Receive tailored suggestions for treatment and skincare routines
+          specific to your needs.
+        </p>
+      </div>
+      <!-- Feature Card 3 -->
+      <!-- <div class="feature-card">
+        <img
+          src="https://picsum.photos/seed/ai-skin3/400/300"
+          alt="AI-Generated 3"
+        />
+        <h3>Secure & Private</h3>
+        <p>
+          Rest assured your data is protected using industry-standard security
+          protocols.
+        </p>
+      </div> -->
+    </div>
+    <div class="features-button">
+      <button class="btn-secondary" id="learnMoreBtn">Learn More</button>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-      <h1>Our Services</h1>
-        <div class="services">
-         
-          <div class="s1">
-              <p>AI Chatbase skin-dignose</p>
-          </div>
-          <div class="s2">
-              <p>Image Base skin_dignose and disease detection</p>
-          </div>
-        </div>
-        <div id="base">
-          <p>© 2025 Skinalyze. All Rights Reserved.</p>
-        </div>
-       
-    </footer>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; Created by Aniruddha Bhavsar & Akshad Joshi.</p>
+  </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
