@@ -170,12 +170,18 @@
         <div class="form-section">
             <h1 id="webname">⭕Skinalyze</h1>
             <h2>Login to Your Account</h2>
-             <form method="POST">
-                {{ form.hidden_tag() }}
-                {{ form.username.label }} {{ form.username() }}<br>
-                {{ form.password.label }} {{ form.password() }}<br>
-                {{ form.submit() }}
-            </form> 
+            <form method="POST">
+    {{ form.hidden_tag() }}
+    
+    <label for="username">{{ form.username.label }}</label>
+    {{ form.username(class="input-field") }}<br>
+
+    <label for="password">{{ form.password.label }}</label>
+    {{ form.password(class="input-field") }}<br>
+
+    {{ form.submit(class="submit-btn") }}
+</form>
+
             <div class="social-buttons">
                 <button  id ="g" ><a href="Register.html">Register Now!</a></button>
             </div>
