@@ -3,114 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register page</title>
+    <title>Register Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-    *{
-        box-sizing: border-box;
-    }
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        top: 30px;
-        height: 100vh;
-        margin: 0;
-        background-color: rgba(170, 56, 202, 0.2);
-        
-        
-    }
-    
-    .container {
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        width: 70%;
-        height: 500px;
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0);
-        background-color: rgba(100, 98, 206, 0.5);
-       
-       
-    }
-    
-    #details {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-content: center;
-        width: 50%;
-        height: 250px;
-        position: relative;
-        top: 30px;
-        margin-top: 10px;
-    }
-    
-    #details input {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            /* Mac-style background with blur effect */
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><linearGradient id="a" gradientTransform="rotate(45)" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="%23f1c6f5"/><stop offset="50%" stop-color="%23d1bdf1"/><stop offset="100%" stop-color="%23c7c9f4"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23a)"/><ellipse cx="10%" cy="20%" rx="40%" ry="30%" fill="%23f1c6f5" opacity="0.4" /><ellipse cx="80%" cy="80%" rx="40%" ry="30%" fill="%23c7c9f4" opacity="0.4" /></svg>');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        /* Mac-style frosted glass background effect */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background-color: rgba(255, 255, 255, 0.2);
+            z-index: -1;
+        }
+        .container {
+            display: flex;
+            width: 1000px;
+            height: 500px;
+            background: whitesmoke;
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        .form-section {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: -1;
+            
+            
+        }
+        .form-section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        .submit-btn {
+            background-color: #FFC107;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .submit-btn:hover {
+            background-color: #E0A800;
+            transform: scale(1.05);
+        }
+        .social-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .social-buttons button {
+            flex: 1;
+            margin: 5px;
+            padding: 12px;
+            border: 1px solid #120c0c;
+            border-radius: 8px;
+            cursor: pointer;
+             font-weight:bolder;
+             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+             background-color: #120c0c;
+             color: #ccc;
+            
+            
+        }
+        #a{
+            background-image: url('https://media-hosting.imagekit.io//e8d1a2b0c46e4dd4/screenshot_1740573081893.png?Expires=1835181095&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=2XE-DDoxsGphPsjHvOQB01ZMvs78VVj4PsvlQjM3ASlu-EDr-K~bjIf19fD9r9H4sy3zDBrH9dJnufeV8GyQErMrA1t98gGf9K9C9Bq~gEkiiuj9dfmVBPTMR5tOde3cp~0hJFH-Yac9JIb8wUQQyVpUTbvVL3Hyg5-4uON76OpVgQm3RYPo0pOQyUwERs~IsLzv6qsdFy51sBkablv1pukj4AR2djdmZ7ka0AVNPGhzY9jkkBrbAnimCNciMS2515RbJYNR-6E76xlFBSVqQrJFfzGuXJXYzrojqO4GNMcPgWSEHTR5jdJ3X6KPy3OvuF9DGcCvZ8peAKZSvUPORA__');
+            background-size: 40px;
+            background-repeat: no-repeat;
+            background-position: 50px;
 
-        width: 70%;
-        margin-top: 30px;
-        border-radius: 20px;
-        padding: 8px;
-        background-color: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 4px 10px rgba(3, 2, 4, 0.5);
-        border: 1px solid black;
-       
-      
-       
+        }
+        #g{
+            font-size: larger;
+            
+            
+        }
+        a{
+            text-decoration: none; 
+            color: #ccc;
+            
+        }
+        .social-buttons button:hover{
+           
+            transform: scale(1.05);
+            
+        }
+    
+           
+           
+           
         
-    }
-    #details h1{
-        margin-left: 20px;
        
-    }
-
-    .img{
-        display: flex;
-        justify-content: center;
-        width: 50%;
-        
-    }
-    img{
-        width: 100%;
-        border-radius: 10px;
-    }
-    button{
-        margin-top: 20px;
-        width: 70%;
-        border-radius: 20px;
-        padding: 12px;
-        background-color: black;
-        color: rgb(244, 236, 236);
-    }
-    button:hover{
-        transform: scale(1.05);
-    }
-    h2{
-        position: relative;
-        bottom: 12px;
-        font-weight: bolder;
-        font-size: x-large;
-    }
+        .image-section {
+            flex: 1;
+            background-color: rgba(82, 116, 220, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            color: #777;
+            position: relative;
+            z-index: 34;
+            border-radius: 20px;
+            
+          
+            
+            
+        }
+        .image-section img{
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;          
+           
+        }
+        .form-section #webname{
+            color: rgb(220, 60, 2);
+            font-weight: bolder;
+            position: relative;
+            bottom :80px;
+            right: 43px;
+            background-image: url("");
+        } 
+        input{
+            box-shadow: 0 4px 10px rgba(157, 79, 202, 0.5);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>⭕Skinalyze</h2>
-        <div id="details">
-             <form method="POST">
-                {{ form.hidden_tag() }}
-                {{ form.full_name.label }} {{ form.full_name() }}<br>
-                {{ form.email.label }} {{ form.email() }}<br>
-                {{ form.phone.label }} {{ form.phone() }}<br>
-                {{ form.password.label }} {{ form.password() }}<br>
-                {{ form.submit() }}
-            </form>
+        <div class="form-section">
+            <h1 id="webname">⭕Skinalyze</h1>
+            <h2>Register Yourself NOW!!</h2>
+            <form method="POST">
+    {{ form.hidden_tag() }}
+    
+    <label for="username">{{ form.username.label }}</label>
+    {{ form.username(class="input-field") }}<br>
+
+    <label for="password">{{ form.password.label }}</label>
+    {{ form.password(class="input-field") }}<br>
+
+    {{ form.submit(class="submit-btn") }}
+</form>
+
         </div>
-        <div class="img">
-            <img src="https://media-hosting.imagekit.io//53dbd237777448bd/screenshot_1740574267559.png?Expires=1835182280&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=aqL19PLX98PML8EP8011g8XwoApjUTfxNYCLdI~YHX9DCDH0L1tbRW8b2mFW4TaenS9AwWBx4P2zBlwGguifnU30EMhvbgrkmmLs~QppV3IhvPF2OscsMzJg8d0ef7jtJr4Z~PDJ-XxkLGvcgFi7-oARaa~iJfm9~2PqbmvaFCV0YG9s-5xP4iSJFE3FTbj4hVcb722nUIh~5z9tvgisCM9itu21j9wJgbi3Dw3KAW9S9-JH~4jq-ld-~ppUHJHStAaUf26F~z7h4wq-V5Y9NkKVXjJRTMEElbSB1DDPmK8gbAgpwpvfGku9qBCfHqAWXeaRydyigr623~-G8~wFcg__" alt="">
-        </div>
-        
+        <div class="image-section"><img src="https://media-hosting.imagekit.io//53dbd237777448bd/screenshot_1740574267559.png?Expires=1835182280&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=aqL19PLX98PML8EP8011g8XwoApjUTfxNYCLdI~YHX9DCDH0L1tbRW8b2mFW4TaenS9AwWBx4P2zBlwGguifnU30EMhvbgrkmmLs~QppV3IhvPF2OscsMzJg8d0ef7jtJr4Z~PDJ-XxkLGvcgFi7-oARaa~iJfm9~2PqbmvaFCV0YG9s-5xP4iSJFE3FTbj4hVcb722nUIh~5z9tvgisCM9itu21j9wJgbi3Dw3KAW9S9-JH~4jq-ld-~ppUHJHStAaUf26F~z7h4wq-V5Y9NkKVXjJRTMEElbSB1DDPmK8gbAgpwpvfGku9qBCfHqAWXeaRydyigr623~-G8~wFcg__" alt=""></div>
     </div>
 </body>
 </html>
+
