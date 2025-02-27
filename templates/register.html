@@ -1,15 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register page</title>
+    <style>
+    *{
+        box-sizing: border-box;
+    }
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: 30px;
+        height: 100vh;
+        margin: 0;
+        background-color: rgba(170, 56, 202, 0.2);
+        
+        
+    }
+    
+    .container {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        width: 70%;
+        height: 500px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0);
+        background-color: rgba(100, 98, 206, 0.5);
+       
+       
+    }
+    
+    #details {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        width: 50%;
+        height: 250px;
+        position: relative;
+        top: 30px;
+        margin-top: 10px;
+    }
+    
+    #details input {
+
+        width: 70%;
+        margin-top: 30px;
+        border-radius: 20px;
+        padding: 8px;
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 4px 10px rgba(3, 2, 4, 0.5);
+        border: 1px solid black;
+       
+      
+       
+        
+    }
+    #details h1{
+        margin-left: 20px;
+       
+    }
+
+    .img{
+        display: flex;
+        justify-content: center;
+        width: 50%;
+        
+    }
+    img{
+        width: 100%;
+        border-radius: 10px;
+    }
+    button{
+        margin-top: 20px;
+        width: 70%;
+        border-radius: 20px;
+        padding: 12px;
+        background-color: black;
+        color: rgb(244, 236, 236);
+    }
+    button:hover{
+        transform: scale(1.05);
+    }
+    h2{
+        position: relative;
+        bottom: 12px;
+        font-weight: bolder;
+        font-size: x-large;
+    }
+    </style>
 </head>
 <body>
-    <h2>Register</h2>
+    <div class="container">
+        <h2>⭕Skinalyze</h2>
+        <div id="details">
     <form method="POST">
         {{ form.hidden_tag() }}
         {{ form.username.label }} {{ form.username() }}<br>
         {{ form.password.label }} {{ form.password() }}<br>
         {{ form.submit() }}
     </form>
+        </div>
+        <div class="img">
+            <img src="https://media-hosting.imagekit.io//53dbd237777448bd/screenshot_1740574267559.png?Expires=1835182280&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=aqL19PLX98PML8EP8011g8XwoApjUTfxNYCLdI~YHX9DCDH0L1tbRW8b2mFW4TaenS9AwWBx4P2zBlwGguifnU30EMhvbgrkmmLs~QppV3IhvPF2OscsMzJg8d0ef7jtJr4Z~PDJ-XxkLGvcgFi7-oARaa~iJfm9~2PqbmvaFCV0YG9s-5xP4iSJFE3FTbj4hVcb722nUIh~5z9tvgisCM9itu21j9wJgbi3Dw3KAW9S9-JH~4jq-ld-~ppUHJHStAaUf26F~z7h4wq-V5Y9NkKVXjJRTMEElbSB1DDPmK8gbAgpwpvfGku9qBCfHqAWXeaRydyigr623~-G8~wFcg__" alt="">
+        </div>
+        
+    </div>
 </body>
 </html>
+
+
