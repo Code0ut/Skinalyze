@@ -85,22 +85,37 @@ def users():
 def chatbot_form():
     return render_template("chatbot.html")
 
-@app.route("/predict",methods=["POST"])
+@app.route("/predict", methods=["POST"])
 @login_required
 def predict():
-    # Get the form data
-    data = request.get_json()  # Get JSON data from frontend
+    data = request.get_json()
+
+    # Debugging: Print received JSON data
+    print("Received JSON:", data)
+
+    if not data:
+        return jsonify({"status": "error", "message": "No data received"}), 400
+
     answers = [
-        data.get('primary_system'),
+        data.get('primary_symptom'),
         data.get('location'),
-        data.get('assosciated_symptoms'),
+        data.get('associated_symptoms'), 
         data.get('duration'),
         data.get('severity'),
-        data.get('previous_diagnosis')
+        data.get('additional_info')
     ]
+
     from chatbot import chatbot_response
-    result=chatbot_response(answers)
-    return jsonify(result)
+    result = chatbot_response(answers)
+
+    # Debugging: Print chatbot response
+    print("Chatbot response:", result)
+
+    if not result:
+        return jsonify({"status": "error", "message": "No response from chatbot"}), 500
+
+    return jsonify({"status": "success", "message": "Prediction successful", "data": result})
+
 
 if __name__ == "__main__":  # Run the application
 
