@@ -23,7 +23,7 @@ nltk.download('wordnet')
 # ---------------------
 # 2. Load Dataset
 # ---------------------
-dataset_path = "comprehensive_skin_disease_dataset.json"
+dataset_path = "datasets/Chatbot_dataset.json"
 if not os.path.exists(dataset_path):
     raise FileNotFoundError(f"{dataset_path} not found. Please ensure the file is in the current directory.")
 
@@ -135,4 +135,16 @@ def chatbot_response(user_input):
     # Get the index of the highest similarity
     best_match_idx = torch.argmax(similarities).item()
     predicted_disease = disease_names[best_match_idx]
-    return predicted_disease
+    # Extract details safely
+    symptoms = ", ".join(details.get("symptoms", ["Not available"]))
+    causes = ", ".join(details.get("causes", ["Not available"]))
+    cure = ", ".join(details.get("cure", ["Not available"]))
+    home_remedies = ", ".join(details.get("home_remedies", ["Not available"]))
+
+    # Format output properly
+    response = f"""
+        🔍 Predicted Disease: {predicted_disease}\n\n🏥 Symptoms: {symptoms}\n⚠️Causes: {causes}\n💊Cure: {cure}\n🌿Home Remedies: {home_remedies}"""
+
+    return response
+
+

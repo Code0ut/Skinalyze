@@ -83,60 +83,45 @@ def users():
 
 @app.route("/chatbot_form")
 def chatbot_form():
-<<<<<<< Updated upstream
     return render_template("chatbot.html")
+
 
 @app.route("/predict", methods=["POST"])
 @login_required
 def predict():
-    data = request.get_json()
+    try:
+        data = request.get_json()
 
-    # Debugging: Print received JSON data
-    print("Received JSON:", data)
+        if not data:
+            print("Error: No data received")  # Debugging
+            return jsonify({"status": "error", "message": "No data received"}), 400
 
-    if not data:
-        return jsonify({"status": "error", "message": "No data received"}), 400
+        print("Received JSON:", data)  # Debugging
 
-    answers = [
-        data.get('primary_symptom'),
-        data.get('location'),
-        data.get('associated_symptoms'), 
-        data.get('duration'),
-        data.get('severity'),
-        data.get('additional_info')
-    ]
+        answers = [
+            data.get('primary_symptom'),
+            data.get('location'),
+            data.get('associated_symptoms'),
+            data.get('duration'),
+            data.get('severity'),
+            data.get('additional_info')
+        ]
+        user_input=" ".join(answers)
+        from chatbot import chatbot_response
+        result = chatbot_response(user_input)
 
-    from chatbot import chatbot_response
-    result = chatbot_response(answers)
+        print("Chatbot response:", result)  # Debugging
 
-    # Debugging: Print chatbot response
-    print("Chatbot response:", result)
+        if not result:
+            print("Error: No response from chatbot")  # Debugging
+            return jsonify({"status": "error", "message": "No response from chatbot"}), 500
 
-    if not result:
-        return jsonify({"status": "error", "message": "No response from chatbot"}), 500
+        return jsonify({"status": "success", "message": "Prediction successful", "data": result})
 
-    return jsonify({"status": "success", "message": "Prediction successful", "data": result})
+    except Exception as e:
+        print("Server Error:", str(e))  # Print the actual error
+        return jsonify({"status": "error", "message": "Internal server error", "error": str(e)}), 500
 
-=======
-    return render_template("chatbot_form.html")
-
-@app.route("/predict",methods=["POST"])
-@login_required
-def predict():
-    # Get the form data
-    data = request.get_json()  # Get JSON data from frontend
-    answers = [
-        data.get('primary_system'),
-        data.get('location'),
-        data.get('assosciated_symptoms'),
-        data.get('duration'),
-        data.get('severity'),
-        data.get('previous_diagnosis')
-    ]
-    from chatbot import chatbot_response
-    result=chatbot_response(answers)
-    return jsonify(result)
->>>>>>> Stashed changes
 
 if __name__ == "__main__":  # Run the application
 

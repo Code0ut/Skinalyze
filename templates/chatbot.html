@@ -128,61 +128,53 @@
     </div>
 
     <script>
-        document.getElementById('symptomForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            // Show loading
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('result').style.display = 'none';
-            
-            // Collect form data
-            const formData = {
-                primary_symptom: document.getElementById('primary_symptom').value,
-                location: document.getElementById('location').value,
-                associated_symptoms: document.getElementById('associated_symptoms').value,
-                duration: document.getElementById('duration').value,
-                severity: document.getElementById('severity').value,
-                additional_info: document.getElementById('additional_info').value
-            };
+      document.getElementById('symptomForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-            try {
-                const response = await fetch('/predict', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('result').style.display = 'none';
 
-                const result = await response.json();
-                const resultDiv = document.getElementById('result');
-                
-                if (result.status === 'success') {
-                    resultDiv.className = 'result-container success';
-                    resultDiv.innerHTML = `
-                        <h3>Success!</h3>
-                        <p>${result.message}</p>
-                        <pre>${JSON.stringify(result.data, null, 2)}</pre>
-                    `;
-                } else {
-                    resultDiv.className = 'result-container error';
-                    resultDiv.innerHTML = `
-                        <h3>Error</h3>
-                        <p>${result.message}</p>
-                    `;
-                }
-            } catch (error) {
-                const resultDiv = document.getElementById('result');
-                resultDiv.className = 'result-container error';
-                resultDiv.innerHTML = `
-                    <h3>Error</h3>
-                    <p>An error occurred while processing your request.</p>
-                `;
-            } finally {
-                document.getElementById('loading').style.display = 'none';
-                resultDiv.style.display = 'block';
-            }
+    const resultDiv = document.getElementById('result'); // Ensure resultDiv is defined at the start
+
+    const formData = {
+        primary_symptom: document.getElementById('primary_symptom').value,
+        location: document.getElementById('location').value,
+        associated_symptoms: document.getElementById('associated_symptoms').value,
+        duration: document.getElementById('duration').value,
+        severity: document.getElementById('severity').value,
+        additional_info: document.getElementById('additional_info').value
+    };
+
+    try {
+        const response = await fetch('/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
         });
+
+        const result = await response.json();
+        console.log("Server Response:", result);  // Debugging: Log server response
+
+        if (result.status === 'success') {
+            resultDiv.className = 'result-container success';
+            resultDiv.innerHTML = `<h3>Success!</h3><p>${result.message}</p><pre>${result.data}</pre>`;
+        } else {
+            resultDiv.className = 'result-container error';
+            resultDiv.innerHTML = `<h3>Error</h3><p>${result.message}</p>`;
+        }
+    } catch (error) {
+        console.error("Fetch Error:", error);  // Debugging: Log fetch errors
+
+        resultDiv.className = 'result-container error'; // Fix the missing definition
+        resultDiv.innerHTML = `<h3>Error</h3><p>An error occurred while processing your request.</p>`;
+    } finally {
+        document.getElementById('loading').style.display = 'none';
+        resultDiv.style.display = 'block';
+    }
+});
+
     </script>
 </body>
 </html> 
