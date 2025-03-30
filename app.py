@@ -1,28 +1,35 @@
 
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash  # Import necessary modules
+
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from models import db, User
 from forms import RegisterForm, LoginForm
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app = Flask(__name__)  # Initialize the Flask application
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'  # Configure the database URI
+
 app.config['SECRET_KEY'] = 'supersecretkey'
 
-db.init_app(app)
+db.init_app(app)  # Initialize the database with the app
+
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
-@login_manager.user_loader
+@login_manager.user_loader  # Load user for login management
+
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route("/")
+@app.route("/")  # Route for the index page
+
 def index():
     return render_template("dashboard.html")
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])  # Route for user registration
+
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
@@ -41,7 +48,8 @@ def register():
     return render_template("register.html", form=form)
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])  # Route for user login
+
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -53,24 +61,35 @@ def login():
             flash("Login failed. Check username and password.", "danger")
     return render_template("login.html", form=form)
 
-@app.route("/dashboard")
+@app.route("/dashboard")  # Route for the user dashboard
+
 @login_required
 def dashboard():
     return render_template("dashboard.html", username=current_user.username)
 
-@app.route("/logout")
+@app.route("/logout")  # Route for user logout
+
 @login_required
 def logout():
     logout_user()
     return redirect(url_for("login"))
 
-@app.route("/users")
+@app.route("/users")  # Route for displaying registered users
+
 @login_required
 def users():
     all_users = User.query.all()
     return render_template("users.html", users=all_users)
 
-if __name__ == "__main__":
+@app.route("/chatbot_form",methods=["POST"])
+@login_required
+def chatbot_form():
+    # Get the form data
+    data = request.form()
+    return render_template("chatbot_form.html", data=data)
+
+if __name__ == "__main__":  # Run the application
+
     with app.app_context():
         db.create_all()
     app.run(debug=True)

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Assessment Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+            border: 1px solid #d6e9c6;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+            border: 1px solid #ebccd1;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Symptom Assessment Form</h1>
+        <form id="symptomForm">
+            <div class="form-group">
+                <label for="primary_symptom">1. What is your primary symptom?</label>
+                <input type="text" id="primary_symptom" name="primary_symptom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="location">2. Where on your body is this symptom located?</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+
+            <div class="form-group">
+                <label for="associated_symptoms">3. Are there any associated symptoms (e.g., itching, swelling, redness)?</label>
+                <textarea id="associated_symptoms" name="associated_symptoms" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="duration">4. How long have you been experiencing these symptoms?</label>
+                <input type="text" id="duration" name="duration" placeholder="e.g., 2 days, 1 week" required>
+            </div>
+
+            <div class="form-group">
+                <label for="severity">5. How severe are these symptoms on a scale from 1 to 10?</label>
+                <input type="number" id="severity" name="severity" min="1" max="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="additional_info">6. Any additional observations or triggers (e.g., recent exposure, diet changes)?</label>
+                <textarea id="additional_info" name="additional_info" required></textarea>
+            </div>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <div class="loading" id="loading">
+            Processing your request...
+        </div>
+
+        <div class="result-container" id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('symptomForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            
+            // Collect form data
+            const formData = {
+                primary_symptom: document.getElementById('primary_symptom').value,
+                location: document.getElementById('location').value,
+                associated_symptoms: document.getElementById('associated_symptoms').value,
+                duration: document.getElementById('duration').value,
+                severity: document.getElementById('severity').value,
+                additional_info: document.getElementById('additional_info').value
+            };
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+                const resultDiv = document.getElementById('result');
+                
+                if (result.status === 'success') {
+                    resultDiv.className = 'result-container success';
+                    resultDiv.innerHTML = `
+                        <h3>Success!</h3>
+                        <p>${result.message}</p>
+                        <pre>${JSON.stringify(result.data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.className = 'result-container error';
+                    resultDiv.innerHTML = `
+                        <h3>Error</h3>
+                        <p>${result.message}</p>
+                    `;
+                }
+            } catch (error) {
+                const resultDiv = document.getElementById('result');
+                resultDiv.className = 'result-container error';
+                resultDiv.innerHTML = `
+                    <h3>Error</h3>
+                    <p>An error occurred while processing your request.</p>
+                `;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                resultDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html> 
