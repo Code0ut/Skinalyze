@@ -81,12 +81,26 @@ def users():
     all_users = User.query.all()
     return render_template("users.html", users=all_users)
 
-@app.route("/chatbot_form",methods=["POST"])
-@login_required
+@app.route("/chatbot_form")
 def chatbot_form():
+    return render_template("chatbot_form.html")
+
+@app.route("/predict",methods=["POST"])
+@login_required
+def predict():
     # Get the form data
-    data = request.form()
-    return render_template("chatbot_form.html", data=data)
+    data = request.get_json()  # Get JSON data from frontend
+    answers = [
+        data.get('primary_system'),
+        data.get('location'),
+        data.get('assosciated_symptoms'),
+        data.get('duration'),
+        data.get('severity'),
+        data.get('previous_diagnosis')
+    ]
+    from chatbot import chatbot_response
+    result=chatbot_response(answers)
+    return jsonify(result)
 
 if __name__ == "__main__":  # Run the application
 
