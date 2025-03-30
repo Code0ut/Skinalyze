@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, redirect, url_for, flash  # Import necessary modules
+from flask import Flask, render_template, redirect, url_for, flash, request,jsonify  # Import necessary modules
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -83,6 +83,7 @@ def users():
 
 @app.route("/chatbot_form")
 def chatbot_form():
+<<<<<<< Updated upstream
     return render_template("chatbot.html")
 
 @app.route("/predict", methods=["POST"])
@@ -116,6 +117,26 @@ def predict():
 
     return jsonify({"status": "success", "message": "Prediction successful", "data": result})
 
+=======
+    return render_template("chatbot_form.html")
+
+@app.route("/predict",methods=["POST"])
+@login_required
+def predict():
+    # Get the form data
+    data = request.get_json()  # Get JSON data from frontend
+    answers = [
+        data.get('primary_system'),
+        data.get('location'),
+        data.get('assosciated_symptoms'),
+        data.get('duration'),
+        data.get('severity'),
+        data.get('previous_diagnosis')
+    ]
+    from chatbot import chatbot_response
+    result=chatbot_response(answers)
+    return jsonify(result)
+>>>>>>> Stashed changes
 
 if __name__ == "__main__":  # Run the application
 
