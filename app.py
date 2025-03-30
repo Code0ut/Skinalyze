@@ -83,7 +83,7 @@ def users():
 
 @app.route("/chatbot_form")
 def chatbot_form():
-    return render_template("chatbot_form.html")
+    return render_template("chatbot.html")
 
 @app.route("/predict",methods=["POST"])
 @login_required
