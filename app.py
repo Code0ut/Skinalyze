@@ -110,16 +110,16 @@ def predict():
         from chatbot import chatbot_response
         result = chatbot_response(user_input)
 
-        print("Chatbot response:", result)  # Debugging
+        
 
         if not result:
-            print("Error: No response from chatbot")  # Debugging
+            ng
             return jsonify({"status": "error", "message": "No response from chatbot"}), 500
 
         return jsonify({"status": "success", "message": "Prediction successful", "data": result})
 
     except Exception as e:
-        print("Server Error:", str(e))  # Print the actual error
+        
         return jsonify({"status": "error", "message": "Internal server error", "error": str(e)}), 500
 
 
