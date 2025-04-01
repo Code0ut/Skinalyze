@@ -113,7 +113,6 @@ def predict():
         
 
         if not result:
-            ng
             return jsonify({"status": "error", "message": "No response from chatbot"}), 500
 
         return jsonify({"status": "success", "message": "Prediction successful", "data": result})
