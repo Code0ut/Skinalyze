@@ -17,6 +17,7 @@ from sentence_transformers import SentenceTransformer
 # 1. Download NLTK Data
 # ---------------------
 nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
