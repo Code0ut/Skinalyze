@@ -86,40 +86,31 @@ def chatbot_form():
     return render_template("chatbot.html")
 
 
-@app.route("/predict", methods=["POST"])
-@login_required
-def predict():
-    try:
-        data = request.get_json()
-
-        if not data:
-            print("Error: No data received")  # Debugging
-            return jsonify({"status": "error", "message": "No data received"}), 400
-
-        print("Received JSON:", data)  # Debugging
-
-        answers = [
-            data.get('primary_symptom'),
-            data.get('location'),
-            data.get('associated_symptoms'),
-            data.get('duration'),
-            data.get('severity'),
-            data.get('additional_info')
-        ]
-        user_input=" ".join(answers)
-        from chatbot import chatbot_response
-        result = chatbot_response(user_input)
-
+@app.route('/predict', methods=['GET', 'POST'])
+def index():
+    API_URL="https://huggingface.co/spaces/Pro-Coder/Skinalyze"
+    result = None
+    if request.method == 'POST':
+        primary_symptom = request.form['primary_symptom']
+        location = request.form['location']
+        associated_symptoms = request.form['associated_symptoms']
+        duration = request.form['duration']
+        severity = request.form['severity']
+        additional_info = request.form['additional_info']
         
-
-        if not result:
-            return jsonify({"status": "error", "message": "No response from chatbot"}), 500
-
-        return jsonify({"status": "success", "message": "Prediction successful", "data": result})
-
-    except Exception as e:
+        data = {
+            "data": [
+                primary_symptom, location, associated_symptoms, duration, severity, additional_info
+            ]
+        }
         
-        return jsonify({"status": "error", "message": "Internal server error", "error": str(e)}), 500
+        response = requests.post(API_URL, json=data)
+        if response.status_code == 200:
+            result = response.json()["data"][0]
+        else:
+            result = "Error: Unable to fetch response from API."
+    
+    return jsonify(result)
 
 
 if __name__ == "__main__":  # Run the application
