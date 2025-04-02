@@ -8,3 +8,4 @@ nltk==3.8.1
 torch==2.2.0
 sentence-transformers==2.5.1
 numpy==1.26.3
+gradio_client

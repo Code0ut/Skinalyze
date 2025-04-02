@@ -1,6 +1,5 @@
-
 from flask import Flask, render_template, redirect, url_for, flash, request,jsonify  # Import necessary modules
-
+import requests
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -87,29 +86,29 @@ def chatbot_form():
 
 
 @app.route('/predict', methods=['GET', 'POST'])
-def index():
-    API_URL="https://huggingface.co/spaces/Pro-Coder/Skinalyze"
+def predict():
+    global primary_symptom0,location0,associated_symptoms0,duration0,severity0,additional_info0
     result = None
     if request.method == 'POST':
-        primary_symptom = request.form['primary_symptom']
-        location = request.form['location']
-        associated_symptoms = request.form['associated_symptoms']
-        duration = request.form['duration']
-        severity = request.form['severity']
-        additional_info = request.form['additional_info']
-        
-        data = {
-            "data": [
-                primary_symptom, location, associated_symptoms, duration, severity, additional_info
-            ]
-        }
-        
-        response = requests.post(API_URL, json=data)
-        if response.status_code == 200:
-            result = response.json()["data"][0]
-        else:
-            result = "Error: Unable to fetch response from API."
-    
+        primary_symptom0 = request.form['primary_symptom']
+        location0 = request.form['location']
+        associated_symptoms0 = request.form['associated_symptoms']
+        duration0 = request.form['duration']
+        severity0 = request.form['severity']
+        additional_info0 = request.form['additional_info']
+
+    from gradio_client import Client
+
+    client = Client("Pro-Coder/Skinalyze")
+    result = client.predict(
+        primary_symptom=primary_symptom0,
+        location=location0,
+        associated_symptoms=associated_symptoms0,
+        duration=duration0,
+        severity=severity0,
+        additional_info=additional_info0,
+        api_name="/predict"
+    )
     return jsonify(result)
 
 
