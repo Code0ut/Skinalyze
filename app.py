@@ -27,8 +27,8 @@ def load_user(user_id):
 
 def index():
     return render_template("dashboard.html")
+    
 @app.route("/register", methods=["GET", "POST"])  # Route for user registration
-
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
