@@ -1,143 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Register Page</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet"/>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
 
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: antiquewhite;
-    }
+.container {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 
-    .container {
-      width: 60%;
-      max-width: 800px;
-      background-color: rgba(238, 196, 238, 0.5);
-      border-radius: 12px;
-      box-shadow: 0px 4px 25px 3px rgb(59, 63, 197);
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-    }
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+}
 
-    #webname {
-      color: crimson;
-      font-size: 28px;
-      font-weight: bold;
-    }
+.form-label {
+    font-weight: bold;
+    color: #495057;
+    text-align: left;
+    display: block;
+}
 
-    h2 {
-      font-size: 24px;
-      color: #333;
-      margin-bottom: 10px;
-    }
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+}
 
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      gap: 20px;
-    }
+textarea.form-control {
+    resize: vertical;
+}
 
-    .input-field {
-      width: 80%;
-      height: 40px;
-      border-radius: 12px;
-      border: none;
-      background-color: rgb(173, 178, 241);
-      padding-left: 10px;
-      font-size: 16px;
-    }
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: #007bff;
+    border: none;
+    transition: background 0.3s ease;
+}
 
-    label {
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-      font-weight: bold;
-      font-size: larger;
-      width: 80%;
-      text-align: left;
-    }
+.btn-primary:hover {
+    background-color: #0056b3;
+}
 
-    .submit-btn {
-      width: 80%;
-      height: 40px;
-      border-radius: 12px;
-      border: none;
-      background-color: rgb(78, 87, 216);
-      font-weight: bolder;
-      font-size: x-large;
-      color: white;
-      cursor: pointer;
-    }
+#result {
+    background: #e9ecef;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+}
 
-    .submit-btn:hover {
-      background-color: aqua;
-      color: black;
-    }
 
-    .social-buttons {
-      display: flex;
-      justify-content: space-between;
-      width: 80%;
-    }
+    </style>
 
-    .social-buttons button {
-      flex: 1;
-      margin: 5px;
-      padding: 12px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      background-color: #120c0c;
-      color: #ccc;
-      border: none;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    }
 
-    .social-buttons button:hover {
-      transform: scale(1.05);
-    }
 
-    a {
-      text-decoration: none;
-      color: #ccc;
-    }
-  </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 <body>
-  <div class="container">
-    <h1 id="webname">⭕Skinalyze</h1>
-    <h2>Register Yourself NOW!!</h2>
-    <form method="POST">
-      {{ form.hidden_tag() }}
-
-      <label for="username">{{ form.username.label }}</label>
-      {{ form.username(class="input-field") }}
-
-      <label for="password">{{ form.password.label }}</label>
-      {{ form.password(class="input-field") }}
-
-      {{ form.submit(class="submit-btn") }}
-    </form>
-
-    <div class="social-buttons">
-      <button id="a"><a href="#">Login with Apple</a></button>
-      <button id="g"><a href="#">Login with Google</a></button>
+    <div class="container mt-5">
+        <h2 class="text-center">DISEASE ASSESSMENT FORM</h2>
+        <form action="/predict" method="post">
+            <div class="mb-3">
+                <label for="primary_symptom" class="form-label">Primary Symptom</label>
+                <input type="text" class="form-control" id="primary_symptom" name="primary_symptom" required>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <div class="mb-3">
+                <label for="associated_symptoms" class="form-label">Associated Symptoms</label>
+                <input type="text" class="form-control" id="associated_symptoms" name="associated_symptoms">
+            </div>
+            <div class="mb-3">
+                <label for="duration" class="form-label">Duration</label>
+                <input type="text" class="form-control" id="duration" name="duration" required>
+            </div>
+            <div class="mb-3">
+                <label for="severity" class="form-label">Severity</label>
+                <select class="form-control" id="severity" name="severity" required>
+                    <option value="Mild">Mild</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Severe">Severe</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="additional_info" class="form-label">Additional Information</label>
+                <textarea class="form-control" id="additional_info" name="additional_info"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+        <div id="result" class="mt-4"></div>
     </div>
-  </div>
+    <script>
+        document.querySelector("form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch("/predict", {
+                method: "POST",
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById("result").innerHTML = `<h5>Prediction:</h5><p>${result}</p>`;
+        });
+    </script>
 </body>
 </html>
