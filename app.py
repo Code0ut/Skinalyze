@@ -80,6 +80,11 @@ def users():
     all_users = User.query.all()
     return render_template("users.html", users=all_users)
 
+@app.route("image_form")
+def image_form():
+    return render_tempelate("image_form.html")
+
+
 @app.route("/chatbot_form")
 def chatbot_form():
     return render_template("chatbot.html")
