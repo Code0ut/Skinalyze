@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Skinalyze</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <style>
     /* Global Resets and Fonts */
 * {
@@ -24,9 +25,11 @@ body {
 
 /* Navigation Bar */
 .navbar {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
+
+  display:block;
   padding: 1rem 2rem;
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(6px);
@@ -34,6 +37,7 @@ body {
   width: 100%;
   top: 0;
   z-index: 999;
+  height: 90px;
   transition: background-color 0.5s ease;
 }
 .navbar.scrolled {
@@ -45,10 +49,116 @@ body {
   color: #7b3fe4;
 
 }
+profile {
+  position: relative;
+  display: inline-block;
+}
+.nav-links{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  position: relative;
+  bottom:40px;
+
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+    position: absolute;
+  right: 2rem;
+  top: 90px;
+  background-color: rgb(196, 182, 211);
+  width: 300px;
+  max-height:0px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  z-index: 1000;
+  gap: 20px;
+}
+
+.profile.menu1 {
+  max-height: 600px;
+  overflow: visible;
+
+
+}
+
+.profile-dropdown  {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 12px;
+  padding: 24px;
+  margin:23px auto ;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  font-size: larger;
+
+
+
+
+
+
+}
+.profile-dropdown span{
+
+
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 10px;
+
+
+}
+.profile-dropdown button{
+  width: 250px;
+  background-color: #7b3fe4;
+  border-radius: 12px;
+ height: 34px;
+ font-weight: bolder;
+ font-size: large;
+ transition: transform 0.3s ease, background-color 0.3s ease;
+
+
+}
+a{
+  text-decoration: none;
+  color: rgb(248, 248, 248);
+
+}
+#upload{
+        border-radius: 50px;
+
+
+}
+
+
+
+
+/* Profile Image */
+ img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(123, 63, 228, 0.5);
+}
+
+
+
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 }
 .nav-links li a {
   text-decoration: none;
@@ -56,7 +166,30 @@ body {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background 0.3s ease, color 0.3s ease;
+
 }
+.nav-links li img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
+  bottom: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-links li img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+ .profmenu{
+      position: relative;
+      top: 80px;
+      background-color: aliceblue;
+ }
+
+
 .nav-links li a:hover {
   background-color: #7b3fe4;
   color: #fff;
@@ -65,6 +198,12 @@ body {
   background-color: #7b3fe4;
   color: #fff;
 }
+
+.profile img{
+  width: 37%;
+  height: 113px;
+}
+
 
 /* Hero Section */
 .hero-section {
@@ -79,6 +218,7 @@ body {
   animation: fadeIn 1.5s ease-in-out;
   background-repeat: no-repeat;
   background-size: 100%;
+  text-decoration: none;
 }
 .hero-content {
   max-width: 600px;
@@ -87,6 +227,7 @@ body {
   padding: 2rem;
   border-radius: 8px;
   animation: slideUp 1s ease-in-out;
+
 }
 .hero-content h1 {
   font-size: 2rem;
@@ -131,7 +272,7 @@ body {
   gap: 2rem;
   margin-bottom: 2rem;
   justify-content: 12px;
-  
+
 }
 .feature-card {
   background-color: rgb(157, 162, 230,0.3);
@@ -143,18 +284,19 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 400px;
   /* border: 4px solid rgb(17, 19, 17);   */
- 
+
 }
 .feature-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
 }
 .feature-card img {
   width: 80%;
   height: auto;
   border-radius: 8px;
   margin-bottom: 1rem;
-  
+
 }
 .feature-card #img2 {
   width: 90%;
@@ -226,9 +368,8 @@ body {
     align-items: center;
   }
 }
-    
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    </style>
 </head>
 <body>
   <!-- Navigation Bar -->
@@ -236,17 +377,32 @@ body {
     <div class="logo">Skinalyze</div>
     <ul class="nav-links">
       <li><a href="#" class="active">Home</a></li>
-      <li><a href="login">Login</a></li>
-      <li><a href="#">About Us</a></li>
+      <li><a href="#">About us</a></li>
+      <img src="https://media-hosting.imagekit.io/9e20cdf04c954bfb/screenshot_1742992996460.png?Expires=1837601002&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=QUEVlHnOS3Kb6AvqixmCWw5RZ~YGzB56l~MWK~Ryx0k7xhxS7dohytAEG3vCFvnEHOQRPK1uASv~bqd3gGBbjVwVVgV5q0g-XUg~y5fqLM6Eqs-MkZ9NlZg1Gtx4izUIxKp9IwzivTgQ9F379vmtDIpix-8cyVp3GeYhAG~qkaeJY3m3JFLP8zUOvzM0HtDfF5DYC02ekaOCZtOESIRKQrYAnU3VyKrn9bY1Y1rrdCSGGR5JG5c8Uc9JQGt9pYJSkstUQ5f3nfOUcYYXjOYAdzYAXMNE1MwGz5qYlYNWzbV7MSB9PpAHN1g54lrsxEIOryKkn2f2~qJukejVkEpGOQ__"  onclick="toggleMenu()">
     </ul>
-  </nav>
+
+
+    <div class="profile" id="submenu" >
+        <div class="profile-dropdown" >
+         Name<span class="user_name">{{username}}</span>
+         Email<span class="user_name2">{{email}}</span>
+         <button><a href="logout">logout</a></button>
+
+        </div>
+      </div>
+      </nav>
+
+
+
 
   <!-- Hero Section -->
   <header class="hero-section">
+
+
     <div class="hero-content">
       <h1>A Complete Solution for Your Skin Health</h1>
       <p>Personal skin assistant powered by AI</p>
-      <button class="btn-hero" id="tryNowBtn">Try Now</button>
+      <button class="btn-hero" id="tryNowBtn"><a href="Dashboard.html">Try now</a></button>
     </div>
   </header>
 
@@ -255,12 +411,12 @@ body {
     <h2>Our services</h2>
     <div class="feature-cards">
       <!-- Feature Card 1 -->
-      <div class="feature-card" id="instantDiag">
+      <div class="feature-card">
         <img
           src="https://media-hosting.imagekit.io//9c46eb0cb577460b/screenshot_1740145331590.png?Expires=1835199234&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=VMrFhsXDgyLM8gxwibFT6ANLDtvA1lQ1frwYY2gCziHfVh~SJZ-iT2US3mYNm0UISPetFdXnBuwwiYOhX~oIPT8VmmC8ZWxrHwPgtaFjDc3rO3-Y9Vn9I7B3M-YkPJhGEca87c8ebRxKOtmum9JYbM0FPsE7xTq4J2RDlKwt54cuz2Ja-So~aQnMpPe89MW~IbCevntkA5zrIHLWtz7V-ttoTgJ2cIEYBrQ9rXyHTcj9uwpa5mY0URIIt94qgEOXqvGoMB7d3HntMHJXAKQfP2YfEwLb6-gdwvkDg4vBfNm2xG7KtpRdt5CWo-bL8P4wvtE3Z0XF92DEaWKiiwT~fA__"
           alt="AI-Generated 1"
-        />
-        <h3>Instant Diagnosis</h3>
+        /><a href="/image_form">
+        <h3>Instant Diagnosis</h3></a>
         <p>
           Get real-time insights into your skin condition with our advanced AI
           detection system.
@@ -273,10 +429,10 @@ body {
           alt="AI-Generated 2" id ="img2"
         />
         <a href="/chatbot_form">
-        <h3>Personalized Advice</h3></a>
+          <h3>Personalized Advice</h3></a>
         <p>
           Receive tailored suggestions for treatment and skincare routines
-          specific to your needs with the help of our Disease Assessment Form.
+          specific to your needs.
         </p>
       </div>
       <!-- Feature Card 3 -->
@@ -302,6 +458,52 @@ body {
     <p>&copy; Created by Varad Lawate,Akshad Joshi, Omkar Kalburgi,Aniruddha Bhavsar and Hrigved Prabhu</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script >
+    // Smooth scrolling effect for anchor links
+document.addEventListener("DOMContentLoaded", () => {
+    // Sticky Nav Background Change on Scroll
+    const navbar = document.querySelector(".navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+
+    // "Try Now" button scrolls to Features section
+    const tryNowBtn = document.getElementById("tryNowBtn");
+    tryNowBtn.addEventListener("click", () => {
+      const featuresSection = document.getElementById("features");
+      featuresSection.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // "Learn More" button (just an example alert or link)
+    const learnMoreBtn = document.getElementById("learnMoreBtn");
+    learnMoreBtn.addEventListener("click", () => {
+      alert("Here you can provide more details or link to a new page!");
+    });
+  });
+  let submenu=document.getElementById("submenu")
+  function toggleMenu(){
+    submenu.classList.toggle("menu1");
+
+  }
+  function previewImage(event) {
+    const input = event.target;
+    const preview = document.getElementById("profilePreview");
+
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+
+  </script>
+
 </body>
 </html>

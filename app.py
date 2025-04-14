@@ -26,7 +26,7 @@ def load_user(user_id):
 @app.route("/")  # Route for the index page
 
 def index():
-    return render_template("dashboard.html")
+    return render_template("dashboard0.html")
     
 @app.route("/register", methods=["GET", "POST"])  # Route for user registration
 def register():
@@ -38,7 +38,7 @@ def register():
             return redirect(url_for("register"))
 
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        new_user = User(username=form.username.data, password=hashed_password)
+        new_user = User(username=form.username.data,email=form.email.data, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
         flash("Registration successful! Please log in.", "success")
@@ -49,22 +49,28 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])  # Route for user login
 
+@app.route("/login", methods=["GET", "POST"])  # Route for user login
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        # Get the user by username
         user = User.query.filter_by(username=form.username.data).first()
+
+        # If user exists and password is correct
         if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user)
-            return redirect(url_for("dashboard"))
-        else:
-            flash("Login failed. Check username and password.", "danger")
+            login_user(user)  # Log the user in
+            return redirect(url_for("dashboard"))  # Redirect to the dashboard
+
+        flash("Login failed. Check username and password.", "danger")
+
     return render_template("login.html", form=form)
+
 
 @app.route("/dashboard")  # Route for the user dashboard
 
 @login_required
 def dashboard():
-    return render_template("dashboard.html", username=current_user.username)
+    return render_template("dashboard.html", username=current_user.username, email=current_user.email)
 
 @app.route("/logout")  # Route for user logout
 
@@ -80,9 +86,9 @@ def users():
     all_users = User.query.all()
     return render_template("users.html", users=all_users)
 
-@app.route("image_form")
+@app.route("/image_form")
 def image_form():
-    return render_tempelate("image_form.html")
+    return render_template("image_form.html")
 
 
 @app.route("/chatbot_form")
