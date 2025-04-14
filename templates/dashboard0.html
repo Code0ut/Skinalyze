@@ -16,116 +16,7 @@ body {
   background: linear-gradient(
     135deg,
     rgba(253, 245, 255, 1) 0%,
-    rgba(255, 255, 255, 1) <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Skinalyze</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="logo">Skinalyze</div>
-    <ul class="nav-links">
-      <li><a href="#" class="active">Home</a></li>
-      <li><a href="#">About us</a></li>
-      <img src="https://media-hosting.imagekit.io/9e20cdf04c954bfb/screenshot_1742992996460.png?Expires=1837601002&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=QUEVlHnOS3Kb6AvqixmCWw5RZ~YGzB56l~MWK~Ryx0k7xhxS7dohytAEG3vCFvnEHOQRPK1uASv~bqd3gGBbjVwVVgV5q0g-XUg~y5fqLM6Eqs-MkZ9NlZg1Gtx4izUIxKp9IwzivTgQ9F379vmtDIpix-8cyVp3GeYhAG~qkaeJY3m3JFLP8zUOvzM0HtDfF5DYC02ekaOCZtOESIRKQrYAnU3VyKrn9bY1Y1rrdCSGGR5JG5c8Uc9JQGt9pYJSkstUQ5f3nfOUcYYXjOYAdzYAXMNE1MwGz5qYlYNWzbV7MSB9PpAHN1g54lrsxEIOryKkn2f2~qJukejVkEpGOQ__"  onclick="toggleMenu()">
-    </ul>
-
-
-    <div class="profile" id="submenu" >
-      <!-- <img src="https://media-hosting.imagekit.io/9e20cdf04c954bfb/screenshot_1742992996460.png?Expires=1837601002&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=QUEVlHnOS3Kb6AvqixmCWw5RZ~YGzB56l~MWK~Ryx0k7xhxS7dohytAEG3vCFvnEHOQRPK1uASv~bqd3gGBbjVwVVgV5q0g-XUg~y5fqLM6Eqs-MkZ9NlZg1Gtx4izUIxKp9IwzivTgQ9F379vmtDIpix-8cyVp3GeYhAG~qkaeJY3m3JFLP8zUOvzM0HtDfF5DYC02ekaOCZtOESIRKQrYAnU3VyKrn9bY1Y1rrdCSGGR5JG5c8Uc9JQGt9pYJSkstUQ5f3nfOUcYYXjOYAdzYAXMNE1MwGz5qYlYNWzbV7MSB9PpAHN1g54lrsxEIOryKkn2f2~qJukejVkEpGOQ__" alt="">
-      <h2>Welcome user</h2> -->
-      <img id="profilePreview" src="data:image/jpeg;base64,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" alt="Profile Picture" class="pic">
-      <form action="">
-        <p>Upload Picture</p>
-        <input  id = "upload" type="file" name="pic" accept="image/*" onchange="previewImage(event)">
-      </form>
-
-        <div class="profile-dropdown" >
-         Name<span class="user_name"> AKSHAD JOSHI</span>
-         Email<span class="user_name2">akshaj20052gmail.com</span>
-         Phone<span class="pass">phoneno</span>
-         <button><a href="index.html">logout</a></button>
-
-        </div>
-      </div>
-      </nav>
-
-
-
-
-  <!-- Hero Section -->
-  <header class="hero-section">
-
-
-    <div class="hero-content">
-      <h1>A Complete Solution for Your Skin Health</h1>
-      <p>Personal skin assistant powered by AI</p>
-      <button class="btn-hero" id="tryNowBtn"><a href="Dashboard.html">Try now</a></button>
-    </div>
-  </header>
-
-  <!-- Features Section -->
-  <section class="features" id="features">
-    <h2>Our services</h2>
-    <div class="feature-cards">
-      <!-- Feature Card 1 -->
-      <div class="feature-card">
-        <img
-          src="https://media-hosting.imagekit.io//9c46eb0cb577460b/screenshot_1740145331590.png?Expires=1835199234&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=VMrFhsXDgyLM8gxwibFT6ANLDtvA1lQ1frwYY2gCziHfVh~SJZ-iT2US3mYNm0UISPetFdXnBuwwiYOhX~oIPT8VmmC8ZWxrHwPgtaFjDc3rO3-Y9Vn9I7B3M-YkPJhGEca87c8ebRxKOtmum9JYbM0FPsE7xTq4J2RDlKwt54cuz2Ja-So~aQnMpPe89MW~IbCevntkA5zrIHLWtz7V-ttoTgJ2cIEYBrQ9rXyHTcj9uwpa5mY0URIIt94qgEOXqvGoMB7d3HntMHJXAKQfP2YfEwLb6-gdwvkDg4vBfNm2xG7KtpRdt5CWo-bL8P4wvtE3Z0XF92DEaWKiiwT~fA__"
-          alt="AI-Generated 1"
-        />
-        <h3>Instant Diagnosis</h3>
-        <p>
-          Get real-time insights into your skin condition with our advanced AI
-          detection system.
-        </p>
-      </div>
-      <!-- Feature Card 2 -->
-      <div class="feature-card">
-        <img
-          src="https://media-hosting.imagekit.io//22a3b7e4e9004c4b/screenshot_1740145788930.png?Expires=1834753796&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=FsJNimlbCw6bsZFpeAcYpf4DwBXsVaSm06IS509~UTHTqB9teiUIgvRP~7Hr73YVKauUZus9LoIt-Tv7E2Ct84QEnuVn-SpwvYBvi899E1D~xkGVlHw8CfuGln4oz5zmcu8h85f96G0AhXPATz~egA7Ez3slXEg--YRdRjeCWW5pyQ0ykSrsyD3UEQuw7GF1SrURxvaS23kMSedwyIWQNUQfWDhZotQlZ6fXaQR~-V1SVk936uKnIf8Ihaq9EhItp-Qttf4TsE-BKwtS0CNa5xs24txrWSXd9kJkh73EKTqKN-U8C97Qwa-4wKgTMw6wlPZ~Nlt1M4N2QfHWaDT7RA__"
-          alt="AI-Generated 2" id ="img2"
-        />
-        <h3>Personalized Advice</h3>
-        <p>
-          Receive tailored suggestions for treatment and skincare routines
-          specific to your needs.
-        </p>
-      </div>
-      <!-- Feature Card 3 -->
-      <!-- <div class="feature-card">
-        <img
-          src="https://picsum.photos/seed/ai-skin3/400/300"
-          alt="AI-Generated 3"
-        />
-        <h3>Secure & Private</h3>
-        <p>
-          Rest assured your data is protected using industry-standard security
-          protocols.
-        </p>
-      </div> -->
-    </div>
-    <div class="features-button">
-      <button class="btn-secondary" id="learnMoreBtn">Learn More</button>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; Created by Aniruddha Bhavsar & Akshad Joshi.</p>
-  </footer>
-
-  <script src="script.js"></script>
-
-</body>
-</html>
-100%
-  );
+    rgba(255, 255, 255, 1) 100%);
   color: #333;
   scroll-behavior: smooth;
 }
@@ -345,7 +236,7 @@ body {
     <ul class="nav-links">
       <li><a href="#" class="active">Home</a></li>
       <li><a href="login">Login</a></li>
-      <li><a href="#">About Us</a></li>
+      <li><a href="about_us">About Us</a></li>
     </ul>
   </nav>
 
@@ -368,7 +259,8 @@ body {
           src="https://media-hosting.imagekit.io//9c46eb0cb577460b/screenshot_1740145331590.png?Expires=1835199234&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=VMrFhsXDgyLM8gxwibFT6ANLDtvA1lQ1frwYY2gCziHfVh~SJZ-iT2US3mYNm0UISPetFdXnBuwwiYOhX~oIPT8VmmC8ZWxrHwPgtaFjDc3rO3-Y9Vn9I7B3M-YkPJhGEca87c8ebRxKOtmum9JYbM0FPsE7xTq4J2RDlKwt54cuz2Ja-So~aQnMpPe89MW~IbCevntkA5zrIHLWtz7V-ttoTgJ2cIEYBrQ9rXyHTcj9uwpa5mY0URIIt94qgEOXqvGoMB7d3HntMHJXAKQfP2YfEwLb6-gdwvkDg4vBfNm2xG7KtpRdt5CWo-bL8P4wvtE3Z0XF92DEaWKiiwT~fA__"
           alt="AI-Generated 1"
         />
-        <h3>Instant Diagnosis</h3>
+        <a href="/image_form">
+          <h3>Instant Diagnosis</h3></a>
         <p>
           Get real-time insights into your skin condition with our advanced AI
           detection system.
@@ -387,18 +279,7 @@ body {
           specific to your needs with the help of our Disease Assessment Form.
         </p>
       </div>
-      <!-- Feature Card 3 -->
-      <!-- <div class="feature-card">
-        <img
-          src="https://picsum.photos/seed/ai-skin3/400/300"
-          alt="AI-Generated 3"
-        />
-        <h3>Secure & Private</h3>
-        <p>
-          Rest assured your data is protected using industry-standard security
-          protocols.
-        </p>
-      </div> -->
+
     </div>
     <div class="features-button">
       <button class="btn-secondary" id="learnMoreBtn">Learn More</button>
@@ -410,6 +291,12 @@ body {
     <p>&copy; Created by Varad Lawate,Akshad Joshi, Omkar Kalburgi,Aniruddha Bhavsar and Hrigved Prabhu</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script >
+    const tryNowBtn = document.getElementById("tryNowBtn");
+    tryNowBtn.addEventListener("click", () => {
+      const featuresSection = document.getElementById("features");
+      featuresSection.scrollIntoView({ behavior: "smooth" });
+    });
+  </script>
 </body>
 </html>

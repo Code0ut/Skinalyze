@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot</title>
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>form</title>
     <style>
         body{
             display: flex;
@@ -11,7 +12,7 @@
             align-items: center;
             background-color: antiquewhite;
         }
-        
+
            form{
             display: flex;
             flex-direction: column;
@@ -19,22 +20,22 @@
             gap: 20px;
             /* border: 2px solid red; */
             width: 60%;
-            height: 1000px;
+            height: 800px;
             border-radius: 12px ;
             box-shadow: 0px 4px 25px 3px rgb(59, 63, 197);
             background-color: rgb(238, 196, 238,0.5);
-            
-           } 
+
+           }
            form input{
                     width: 80%;
                     height: 40px;
                     border-radius: 12px;
                     border: none;
                     background-color: rgb(173, 178, 241);
-                   
+
                     /* box-shadow: 3px 4px 10px 3px rgb(109, 51, 161); */
-                    
-                } 
+
+                }
                 form label{
                     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                     font-weight: bolder;
@@ -43,7 +44,7 @@
                 }
                   input #Information{
                     height: 80px;
-                }  
+                }
                 #but{
                     width: 80%;
                     height: 40px;
@@ -60,55 +61,43 @@
                 #but:hover{
                           background-color: aqua;
                           color: black;
-                          
-                }
-                h1{
-                    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                    color: crimson;
-                }
-                h2{
 
-                }              
+                }
+                h3{
+                    color: #e90090; ;
+                }
+
     </style>
-
-
 </head>
 <body>
-    <div class="container mt-5">
-        <h2 class="text-center">DISEASE ASSESSMENT FORM</h2>
-        <form action="/predict" method="post">
-            <div class="mb-3">
-                <label for="primary_symptom" class="form-label">Primary Symptom</label>
-                <input type="text" class="form-control" id="primary_symptom" name="primary_symptom" required>
-            </div>
-            <div class="mb-3">
-                <label for="location" class="form-label">Location</label>
-                <input type="text" class="form-control" id="location" name="location" required>
-            </div>
-            <div class="mb-3">
-                <label for="associated_symptoms" class="form-label">Associated Symptoms</label>
-                <input type="text" class="form-control" id="associated_symptoms" name="associated_symptoms">
-            </div>
-            <div class="mb-3">
-                <label for="duration" class="form-label">Duration</label>
-                <input type="text" class="form-control" id="duration" name="duration" required>
-            </div>
-            <div class="mb-3">
-                <label for="severity" class="form-label">Severity</label>
-                <select class="form-control" id="severity" name="severity" required>
-                    <option value="Mild">Mild</option>
-                    <option value="Moderate">Moderate</option>
-                    <option value="Severe">Severe</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="additional_info" class="form-label">Additional Information</label>
-                <textarea class="form-control" id="additional_info" name="additional_info"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Predict</button>
-        </form>
-        <div id="result" class="mt-4"></div>
-    </div>
+
+
+
+    <form>
+
+
+
+        <h2> ⭕Skinalyze</h2>
+        <h3>DISEASE ASSESMENT FORM</h3>
+        <label for="">1.What are the primary syntoms you have experince  like? </label>
+        <input type="text" name="primary-syntoms" id="primary"  min="1" max="15" placeholder="itching,rashes,etc." required>
+
+
+        <label for="">2.Specify the affected part ?</label>
+        <input type="text" name="associated-syntoms" id="associated" min="1" max="15" placeholder="back,face,arm,etc." required>
+
+        <label for="">3.Please tell the approx duration of syntoms?</label>
+        <input type="text" name="Duration" id="timeperiod" placeholder="2 days,1 week">
+        <label for="">4.Sevarity ?</label>
+        <input type="text" name="severity" id="severity"  min="1" max="15" placeholder="on scale of 1 to 10 or Mild/Moderate/Severe" required>
+
+        <label for="">5.Additional Infromation ?</label>
+        <input type="text" name="addinfo" id="Information" placeholder="diet changes, exposure to sun,etc">
+
+        <button id="but" type="submit">Predict</button>
+
+
+    </form>
     <script>
         document.querySelector("form").addEventListener("submit", async function(event) {
             event.preventDefault();
@@ -121,5 +110,6 @@
             document.getElementById("result").innerHTML = `<h5>Prediction:</h5><p>${result}</p>`;
         });
     </script>
+
 </body>
 </html>

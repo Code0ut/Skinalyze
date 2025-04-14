@@ -122,6 +122,9 @@ def predict():
     )
     return jsonify(result)
 
+@app.route("/about_us")
+def aboutus():
+    return render_template("aboutUs.html")
 
 if __name__ == "__main__":  # Run the application
 
