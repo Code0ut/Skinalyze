@@ -1,184 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Dignose</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-color:#f5f5f7; /* Mac-style background color */
-            margin: 0;
-            padding: 0;
-            background-color: rgb(179, 99, 223,0.1);
-            background-color: rgb(179, 99, 223,0.1);
-            background-image: url("https://media-hosting.imagekit.io//a0d92825b1df4540/screenshot_1742624318002.png?Expires=1837232328&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=exf~WX0FmuWIUvIXNeBWLXt8ePtQWPEfTOPWO3DIMCgzTHjmakfir2iFmG2Ny7Bifuk0iR5TRG-xaL3uf2o8qwoOXljHs8EohLvcYEPJ4-P2ck6Up7iTmAcGlcF4l7NDsUz0MAnZlAjtYuWfBKBWX2lbJld1newafhVpr59yS-9Ysucxe8nnNsvKgl9zxknsJnzsrh13bDPWW-56-arNORVje38kkUGaKJsk1ACMDlKDVySRXXdmPvidYhEcWKt8AtycVvdgoyzhux7VSrG812rMaEUxaEtFCIs4e-pZ~jo8qKArFKLUf~vfvyTpeT7Zc181IqhB5ZSbgBWRUHw60w__");
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Diagnose</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: rgba(179, 99, 223, 0.1);
+      background-image: url("https://media-hosting.imagekit.io//a0d92825b1df4540/screenshot_1742624318002.png");
+      margin: 0;
+      padding: 0;
+    }
 
-        .imgform{
-            display: block;
-            text-align: center;
-            width: 60%;
-            height: 90%;
-            margin: auto;
-            padding: 7em 10em;
-            background-color:rgb(240, 248, 255,0.6);
-            border-radius: 30px;
-            box-shadow: 3px 4px 20px rgb(90, 45, 127);
-            animation: fadeIn 0.8s ease-in; /* Added animation */
-            transition: all 0.3s ease; /* Added transition */
-            position: relative; /* Added for better positioning */
-            /* background-image: url('https://media-hosting.imagekit.io//3211bbdc708b447c/screenshot_1740764568283.png?Expires=1835372577&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=vp5A8PyahhygDZFZwz5E82jEgBMP8Rios77kLaQT6LgpUp6V8y1lv379GJ52-krld1bbN982c00oJ3T~IwWkzhUB4p5CihD1XbYYi-gJrmNWGsIuHLrlZV-~Dl3snhOvv1W1mMHlqwaQpW2fdQl-gsDpmGBu1hU4wuvgxAc7QqNNG86lqczcW6Lq8KCQnp5Pg8UvCXc3QCpsOZ2kIzIsSyO3QDp-N0frWQnrHPJ1S99EqWIT1~256PaDe3vboQtc0l4IhkD9uTOL2E7XIbH28oIixVf99vVbokxMtnxEFxLerk2T7HUqy4D6sRdLJOBuUAogt3fjnV6FehH9ccoqkA__'); */
-            background-size: 100%;
-            background-repeat: no-repeat;
-            bottom: 20px;
-            background-image: url("https://s3.envato.com/files/328217180/2021-04260.jpg");
-            background-size: cover;
-            background-position: center center;
+    .imgform {
+      display: block;
+      text-align: center;
+      width: 60%;
+      margin: auto;
+      padding: 7em 10em;
+      background-color: rgba(240, 248, 255, 0.6);
+      border-radius: 30px;
+      box-shadow: 3px 4px 20px rgb(90, 45, 127);
+      animation: fadeIn 0.8s ease-in;
+      position: relative;
+      background-image: url("https://s3.envato.com/files/328217180/2021-04260.jpg");
+      background-size: cover;
+      background-position: center center;
+    }
 
+    .imgform:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 15px rgb(86, 52, 118);
+    }
 
+    h1 {
+      color: #d01010;
+      font-weight: bolder;
+      animation: slideDown 0.5s ease-out;
+      position: relative;
+      bottom: 90px;
+    }
 
-        }
+    .file-input-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+      width: 100%;
+      position: relative;
+      border: 2px dashed blue;
+      border-radius: 20px;
+      bottom: 140px;
+    }
 
-        .imgform:hover {
-            transform: scale(1.02); /* Slight scale on hover */
-            box-shadow: 0 6px 15px rgb(86, 52, 118);
-        }
+    input[type="file"] {
+      display: block;
+      margin: auto;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
 
-        h1 {
-            color: #d01010;
-            font-weight:bolder;
-            animation: slideDown 0.5s ease-out; /* Added animation */
-            position: relative;
-            bottom: 90px;
-        }
+    input[type="file"]:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
 
-        /* File input container for better centering */
-        .file-input-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    width: 100%;
-    position: relative;
-    border: 2px solid blue;
-    border-style: dashed;
-    border-radius: 20px;
-    bottom: 140px;
-}
+    button {
+      position: relative;
+      width: 25%;
+      height: 30px;
+      bottom: 100px;
+      border-radius: 12px;
+      background-color: black;
+      color: white;
+      font-weight: bolder;
+      font-size: large;
+      animation: fadeIn 0.8s ease-in;
+    }
 
-input[type="file"] {
-    display: block;
-    margin: auto;
-    text-align: center;
-    width: auto; /* Adjust width to content */
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.1);
-}
+    button:hover {
+      background-color: aqua;
+      color: black;
+    }
 
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-input[type="file"]:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+    @keyframes slideDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-        }
-button{
-            position: relative;
-            text-align: center;
-            width: 25%;
-            height: 30px;
-            bottom: 100px;
-            border-radius: 12px;
-            background-color: black;
-            color: white;
-            font-weight: bolder;
-            font-size: large;
-            animation: fadeIn 0.8s ease-in;
+    .spinner {
+      display: none;
+      margin: 20px auto;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #5e2d91;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
 
-        }
-button:hover{
-            background-color: aqua;
-            color: black;
-        }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
-        /* Added animations keyframes */
-@keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    #loadingMsg {
+      display: none;
+      font-weight: bold;
+      color: #5e2d91;
+      margin-top: 10px;
+    }
 
-@keyframes slideDown {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-.spinner{
-    background-color: beige;
-}
-.result{
-    background-color: beige;
-}
-</style>
+    #result {
+      display: none;
+      background-color: beige;
+      padding: 15px 25px;
+      margin: 30px auto;
+      width: 70%;
+      border-radius: 20px;
+      border: 2px solid #6a1b9a;
+      box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+      font-weight: bold;
+      font-size: 1.1em;
+      color: #2e0d4d;
+    }
+
+    #result p {
+      margin: 0;
+    }
+
+  </style>
 </head>
 <body>
-        <h2>⭕Skinalyze</h2>
+  <h2>⭕Skinalyze</h2>
 
-        <div class="imgform" id="img">
-            <h1>Drag the file to upload</h1>
-            <h2>Get the instant diagnosis</h2>
-            <form id="uploadForm">
-                <div class="file-input-container">
-                <input type="file" id="imageInp" name="image" required></input>
-                </div>
-                <button type="submit" >Upload </button>
-            </form>
-        <div class="spinner" id="spinner"></div>
-        <div id="result"></div>
-        </div>
-     <script type="module">
-      const form = document.getElementById("uploadForm");
-      const spinner = document.getElementById("spinner");
-      const resultDiv = document.getElementById("result");
+  <div class="imgform" id="img">
+    <h1>Drag the file to upload</h1>
+    <h2>Get the instant diagnosis</h2>
 
-      form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const fileInput = document.getElementById("imageInp");
-  const file = fileInput.files[0];
+    <form id="uploadForm">
+      <div class="file-input-container">
+        <input type="file" id="imageInp" name="image" required>
+      </div>
+      <button type="submit">Upload</button>
+    </form>
 
-  if (!file) {
-    alert("Please select a file.");
-    return;
-  }
+    <div class="spinner" id="spinner"></div>
+    <p id="loadingMsg">Diagnosing...</p>
+    <div id="result"></div>
+  </div>
 
-  spinner.style.display = "block";
-  resultDiv.textContent = "";
+  <script type="module">
+    const form = document.getElementById("uploadForm");
+    const spinner = document.getElementById("spinner");
+    const loadingMsg = document.getElementById("loadingMsg");
+    const resultDiv = document.getElementById("result");
 
-  try {
-    const formData = new FormData();
-    formData.append('image', file);
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const fileInput = document.getElementById("imageInp");
+      const file = fileInput.files[0];
 
-    const response = await fetch("/predict_image", {
-      method: "POST",
-      body: formData
+      if (!file) {
+        alert("Please select a file.");
+        return;
+      }
+
+      // Show loader, hide result
+      spinner.style.display = "block";
+      loadingMsg.style.display = "block";
+      resultDiv.style.display = "none";
+
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const response = await fetch("/predict_image", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await response.json();
+
+        spinner.style.display = "none";
+        loadingMsg.style.display = "none";
+
+        if (data.prediction) {
+          let confidenceHTML = "";
+          if (data.confidences && Array.isArray(data.confidences)) {
+            confidenceHTML = data.confidences.map(conf =>
+              `<li><strong>${conf.label}</strong>: ${(conf.confidence * 100).toFixed(2)}%</li>`
+            ).join("");
+          }
+
+          resultDiv.innerHTML = `
+            <p><strong>Prediction:</strong> ${data.prediction}</p>
+            <p><strong>Confidence Levels:</strong></p>
+            <ul>${confidenceHTML}</ul>
+`;
+
+        } else {
+          resultDiv.innerHTML = `<p style="color:red;">${data.error}</p>`;
+        }
+        resultDiv.style.display = "block";
+
+      } catch (err) {
+        spinner.style.display = "none";
+        loadingMsg.style.display = "none";
+        resultDiv.innerHTML = `<p style="color:red;">Something went wrong. Please try again.</p>`;
+        resultDiv.style.display = "block";
+        console.error(err);
+      }
     });
-
-    // Wait for the response and parse it as JSON
-    const data = await response.json();
-
-    spinner.style.display = "none";
-    if (data.prediction) {
-      resultDiv.innerHTML = `<p>Prediction: ${data.prediction}</p>`;
-    } else {
-      resultDiv.innerHTML = `<p style="color:red;">${data.error}</p>`;
-    }
-    console.log(data);
-  } catch (err) {
-    spinner.style.display = "none";
-    resultDiv.innerHTML = `<p style="color:red;">Something went wrong. Please try again.</p>`;
-    console.error(err);
-  }
-});
-
-    </script>
+  </script>
 </body>
 </html>

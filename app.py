@@ -115,9 +115,12 @@ def predict_image():
         )
 
         # Assuming result is a dictionary with a 'prediction' key
-        prediction = result.get('prediction', 'No prediction available')
+        prediction = result.get('label', 'No prediction available')
+        confidences=result.get('confidences','no confidences')
         os.remove(image_path)  # Clean up temp file
-        return jsonify({"prediction": prediction})
+        return jsonify({"prediction": prediction,
+                        "confidences":confidences
+                        })
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
