@@ -5,6 +5,8 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from models import db, User
 from forms import RegisterForm, LoginForm
+import os
+from gradio_client import Client, handle_file
 
 app = Flask(__name__)  # Initialize the Flask application
 
@@ -21,7 +23,8 @@ login_manager.login_view = "login"
 @login_manager.user_loader  # Load user for login management
 
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return db.session.get(User, int(user_id))
+
 
 @app.route("/")  # Route for the index page
 
@@ -45,9 +48,6 @@ def register():
         return redirect(url_for("login"))
 
     return render_template("register.html", form=form)
-
-
-@app.route("/login", methods=["GET", "POST"])  # Route for user login
 
 @app.route("/login", methods=["GET", "POST"])  # Route for user login
 def login():
@@ -89,6 +89,38 @@ def users():
 @app.route("/image_form")
 def image_form():
     return render_template("image_form.html")
+
+
+
+
+@app.route("/predict_image", methods=["POST"])
+def predict_image():
+    if 'image' not in request.files or request.files['image'].filename == '':
+        return jsonify({"error": "No image uploaded or empty filename"}), 400
+
+    image_file = request.files['image']
+    image_path = os.path.join("temp", image_file.filename)
+
+    # Ensure the 'temp' directory exists
+    if not os.path.exists("temp"):
+        os.makedirs("temp")
+
+    image_file.save(image_path)
+
+    try:
+        client = Client("Hrigved/skinalyze")
+        result = client.predict(
+            image=handle_file(image_path),
+            api_name="/predict"
+        )
+
+        # Assuming result is a dictionary with a 'prediction' key
+        prediction = result.get('prediction', 'No prediction available')
+        os.remove(image_path)  # Clean up temp file
+        return jsonify({"prediction": prediction})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 
 @app.route("/chatbot_form")

@@ -125,8 +125,8 @@ button:hover{
 
         <div class="imgform" id="img">
             <h1>Drag the file to upload</h1>
-            <h2>Get the instant dignosis</h2>
-            <form id="uploadform">
+            <h2>Get the instant diagnosis</h2>
+            <form id="uploadForm">
                 <div class="file-input-container">
                 <input type="file" id="imageInp" name="image" required></input>
                 </div>
@@ -135,39 +135,50 @@ button:hover{
         <div class="spinner" id="spinner"></div>
         <div id="result"></div>
         </div>
-    <script>
-       const form = document.getElementById("uploadForm");
-    const spinner = document.getElementById("spinner");
-    const resultDiv = document.getElementById("result");
+     <script type="module">
+      const form = document.getElementById("uploadForm");
+      const spinner = document.getElementById("spinner");
+      const resultDiv = document.getElementById("result");
 
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const fileInput = document.getElementById("imageInput");
-      const file = fileInput.files[0];
+      form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const fileInput = document.getElementById("imageInp");
+  const file = fileInput.files[0];
 
-      if (!file) {
-        alert("Please select a file.");
-        return;
-      }
+  if (!file) {
+    alert("Please select a file.");
+    return;
+  }
 
-      // Show spinner
-      spinner.style.display = "block";
-      resultDiv.textContent = "";
+  spinner.style.display = "block";
+  resultDiv.textContent = "";
 
-      try {
-        const client = await gradio.Client.connect("Hrigved/skinalyze");
-        const result = await client.predict("/predict", {
-				image: file,
-});
-        spinner.style.display = "none";
-        resultDiv.innerHTML = `<p>Prediction: ${result.data}</p>`;
-        console.log(result);
-      } catch (err) {
-        spinner.style.display = "none";
-        resultDiv.innerHTML = `<p style="color:red;">Something went wrong. Please try again.</p>`;
-        console.error(err);
-      }
+  try {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    const response = await fetch("/predict_image", {
+      method: "POST",
+      body: formData
     });
+
+    // Wait for the response and parse it as JSON
+    const data = await response.json();
+
+    spinner.style.display = "none";
+    if (data.prediction) {
+      resultDiv.innerHTML = `<p>Prediction: ${data.prediction}</p>`;
+    } else {
+      resultDiv.innerHTML = `<p style="color:red;">${data.error}</p>`;
+    }
+    console.log(data);
+  } catch (err) {
+    spinner.style.display = "none";
+    resultDiv.innerHTML = `<p style="color:red;">Something went wrong. Please try again.</p>`;
+    console.error(err);
+  }
+});
+
     </script>
 </body>
 </html>
