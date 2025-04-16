@@ -1,17 +1,15 @@
-# Skin Disease Diagnosis using DenseNet121
+🧠 Skinalyze – Intelligent Skin Disease Diagnosis & Assistant
+Skinalyze is an AI-powered web application that provides skin disease diagnosis from images using a deep learning model and supports users through a smart chatbot for dermatological queries.
 
-This project uses transfer learning with DenseNet121 to classify skin diseases based on images. It is deployed using Gradio and hosted on Hugging Face Spaces.
+📌 Features
+🔍 Image-based Skin Disease Diagnosis
+Upload an image of a skin condition to receive a predicted diagnosis using a fine-tuned DenseNet-121 model.
 
-## 🚀 Features
-- Trained on the DermNet dataset
-- Data augmentation for robust learning
-- Transfer learning with DenseNet121
-- Interactive interface with Gradio
+💬 AI Chatbot Assistant
+An interactive chatbot to help answer dermatology-related queries with curated responses.
 
-## 🧠 Model
-Model is trained using PyTorch and saved in `app/model.pth`.
+🌐 Web Interface
+Easy-to-use frontend written using flask and hosted by render.
 
-## 📦 Installation
-
-```bash
-pip install -r requirements.txt
+🧠 Model Training
+The model is based on DenseNet-121 and trained on the DermNet dataset.
