@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
+    <<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>form</title>
     <style>
         body{
@@ -11,7 +10,7 @@
             justify-content: space-between;
             align-items: center;
             flex-direction: column;
-            background-color: white
+            background-color: white;
         }
         
            form{
@@ -25,7 +24,7 @@
             border-radius: 12px ;
             box-shadow: 0px 4px 25px 3px rgb(59, 63, 197);
             background-color: rgb(238, 196, 238,0.5);
-            animation:akshad2 1s cubic-bezier(0.075, 0.82, 0.165, 1)  1;
+            animation:anime2 1s cubic-bezier(0.075, 0.82, 0.165, 1)  1;
             
 
             
@@ -35,7 +34,7 @@
                     height: 40px;
                     border-radius: 12px;
                     border: none;
-                    background-color:rgb(128, 0, 128,0.2)
+                    background-color:rgb(128, 0, 128,0.2);
                    
                     /* box-shadow: 3px 4px 10px 3px rgb(109, 51, 161); */
                     
@@ -46,7 +45,7 @@
                     font-size: larger;
 
                 }
-                  input #Information{
+                  input#Information{
                     height: 80px;
                 }  
                 #but{
@@ -59,15 +58,14 @@
                     top: 28px;
                     font-weight: bolder;
                     font-size:x-large;
-                    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-                    ;
+                    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                     color:white;
 
                 }
                 #but:hover{
                           background-color: rgb(222, 75, 202);
                           color:rgb(0, 0, 0);
-                          animation:akshad 1s cubic-bezier(0.075, 0.82, 0.165, 1)  1 ;
+                          animation:anime 1s cubic-bezier(0.075, 0.82, 0.165, 1)  1 ;
                           
                 }
                 h1{
@@ -75,7 +73,7 @@
                     color: crimson;
                 }
               
-                @keyframes akshad {
+                @keyframes anime {
                     
                 
                     from{
@@ -89,7 +87,7 @@
                     }
                 }
                 
-                @keyframes akshad2 {
+                @keyframes anime2 {
                     
                 
                     from{
@@ -147,13 +145,6 @@
 </head>
 <body>
 
-
-                
-                
-    </style>
-
-</head>
-<body>
    
    
 
@@ -162,24 +153,23 @@
        
            
            <h2> ⭕Skinalyze</h2>
-        <h1>DISEASE ASSESMENT FORM</h1>
-        <label for="">1.What are the primary symptoms you have experince  like(itching ,ratches etc...) ? </label>
-        <input type="text" name="primary-symptoms" id="primary"  min="1" max="15" required>
+        <h1>DISEASE ASSESSMENT FORM</h1>
+        <label for="primary">1.What are the primary symptoms you have experience? </label>
+        <input type="text" name="primary-symptom" id="primary"  min="1" max="15" placeholder="itching ,rashes, etc " required>
 
+        <label for="associated">2.Specify the affected part ?</label>
+        <input type="text" name="location" id="associated" min="1" max="15"  placeholder="back, face, arm, etc." required>
 
-        <label for="">2.Specify the affected part ?</label>
-        <input type="text" name="associated-symptoms" id="associated" min="1" max="15"  placeholder="back, face, arm, etc." required>
-
-        <label for="">3. What are other symptoms you experience?</label>
+        <label for="associated_symptoms">3. What are other symptoms you experience?</label>
         <input type="text" name="associated_symptoms" id="associated_symptoms" placeholder="redness, puss">
 
-        <label for="">4.Please tell the approx duration of symptoms?</label>
-        <input type="text" name="Duration" id="timeperiod" placeholder="    eg., 2 days,1 week">
-        <label for="">5.Severity?</label>
+        <label for="timeperiod">4.Please tell the approx duration of symptoms?</label>
+        <input type="text" name="duration" id="timeperiod" placeholder="    eg., 2 days,1 week">
+        <label for="severity">5.Severity?</label>
         <input type="text" name="severity" id="severity"  min="1" max="15"  placeholder="Mild/Moderate/Severe" required>
 
-        <label for="">6.Additional Infromation ?</label>
-        <input type="text" name="addinfo" id="Information" placeholder="diet changes, exposure to sun, etc.">
+        <label for="Information">6.Additional Infromation ?</label>
+        <input type="text" name="additional_info" id="Information" placeholder="diet changes, exposure to sun, etc.">
 
         <button id="but" type="submit">Predict</button>
 
@@ -188,7 +178,6 @@
 
     
     <div id="loading" style="display: none;">
-        <img src="https://i.gifer.com/YCZH.gif" alt="Loading..." width="60">
         <p>Analyzing... please wait</p>
         </div>
     
@@ -216,7 +205,17 @@
             document.getElementById("loading").style.display = "none";
     
             // Show result
-            document.getElementById("chatbot-response").innerHTML = `<h5>Prediction:</h5><p>${result.result || result}</p>`;
+            let rawResult = result;
+            console.log("API Response:", result);
+            let formattedResult = rawResult
+                .replace(/\*\*Predicted Disease:\*\*/g, "<h5>Predicted Disease:</h5>")
+                .replace(/\*\*Causes:\*\*/g, "<h5>Causes:</h5>")
+                .replace(/\*\*Cure:\*\*/g, "<h5>Cure:</h5>")
+                .replace(/\*\*Home Remedies:\*\*/g, "<h5>Home Remedies:</h5>")
+                .replace(/\*\*/g, "") // Remove any stray bold markers
+
+            document.getElementById("chatbot-response").innerHTML = formattedResult;
+
 
         } catch (err) {
             document.getElementById("loading").style.display = "none";

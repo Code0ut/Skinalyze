@@ -133,26 +133,28 @@ def chatbot_form():
 
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
-    global primary_symptom0,location0,associated_symptoms0,duration0,severity0,additional_info0
+
     result = None
-    if request.method == 'POST':
-        primary_symptom0 = request.form['primary_symptom']
-        location0 = request.form['location']
-        associated_symptoms0 = request.form['associated_symptoms']
-        duration0 = request.form['duration']
-        severity0 = request.form['severity']
-        additional_info0 = request.form['additional_info']
+    form_data = request.form
+    primary_symptom = form_data.get('primary_symptom', '')
+    location = form_data.get('location', '')
+    associated_symptoms = form_data.get('associated_symptoms', '')
+    duration = form_data.get('duration', '')
+    severity = form_data.get('severity', '')
+    additional_info = form_data.get('additional_info', '')
+
+
 
     from gradio_client import Client
 
     client = Client("Pro-Coder/Skinalyze")
     result = client.predict(
-        primary_symptom=primary_symptom0,
-        location=location0,
-        associated_symptoms=associated_symptoms0,
-        duration=duration0,
-        severity=severity0,
-        additional_info=additional_info0,
+        primary_symptom=primary_symptom,
+        location=location,
+        associated_symptoms=associated_symptoms,
+        duration=duration,
+        severity=severity,
+        additional_info=additional_info,
         api_name="/predict"
     )
     return jsonify(result)
