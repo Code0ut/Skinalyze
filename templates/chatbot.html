@@ -220,7 +220,7 @@
 
         } catch (err) {
             document.getElementById("loading").style.display = "none";
-            document.getElementById("chatbot-response").innerHTML = `<p style="color:red;">Something went wrong. Please try again.</p>`;
+            document.getElementById("chatbot-response").innerHTML = `<p style="color:red;">${err}Something went wrong. Please try again.</p>`;
 
         }
     });
