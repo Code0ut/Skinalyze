@@ -5,8 +5,8 @@ Skinalyze is an AI-powered web application that provides skin disease diagnosis 
 🔍 Image-based Skin Disease Diagnosis
 Upload an image of a skin condition to receive a predicted diagnosis using a fine-tuned DenseNet-121 model.
 
-💬 AI Chatbot Assistant
-An interactive chatbot to help answer dermatology-related queries with curated responses.
+💬 disease assessment form
+You can also fill out the form to get diagnosis which is created using AI model trained using NLTK.
 
 🌐 Web Interface
 Easy-to-use frontend written using flask and hosted by render.
