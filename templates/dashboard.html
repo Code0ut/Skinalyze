@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +71,7 @@ profile {
   right: 2rem;
   top: 90px;
   background-color: rgb(196, 182, 211);
-  width: 300px;
+  width: 406px;
   max-height:0px;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
@@ -81,8 +82,8 @@ profile {
 }
 
 .profile.menu1 {
-  max-height: 600px;
-  overflow: visible;
+  max-height: 800px;
+  overflow-x: scroll;
 
 
 }
@@ -91,8 +92,7 @@ profile {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  gap: 12px;
+  gap: 20px;
   padding: 24px;
   margin:23px auto ;
   font-family:Georgia, 'Times New Roman', Times, serif;
@@ -111,6 +111,7 @@ profile {
   background-color: #fff;
   border-radius: 15px;
   padding: 10px;
+ 
 
 
 }
@@ -369,6 +370,7 @@ img:hover {
   }
 }
 
+
     </style>
 </head>
 <body>
@@ -384,7 +386,8 @@ img:hover {
 
     <div class="profile" id="submenu" >
         <div class="profile-dropdown" >
-         Name<span class="user_name">{{username}}</span>
+        <h1>Welcome user</h1>
+         Name<span class="user_name">{{name}}</span>
          Email<span class="user_name2">{{email}}</span>
          <button><a href="logout">logout</a></button>
 
