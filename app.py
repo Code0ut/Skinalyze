@@ -1,170 +1,204 @@
-from flask import Flask, render_template, redirect, url_for, flash, request,jsonify  # Import necessary modules
-import requests
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from models import db, User
-from forms import RegisterForm, LoginForm
+import streamlit as st
 import os
+import sqlite3
+import bcrypt
 from gradio_client import Client, handle_file
+from PIL import Image
 
-app = Flask(__name__)  # Initialize the Flask application
+# -----------------------------
+# DATABASE SETUP
+# -----------------------------
+def init_db():
+    conn = sqlite3.connect("database.db")
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS users
+                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  username TEXT UNIQUE,
+                  email TEXT,
+                  password TEXT)''')
+    conn.commit()
+    conn.close()
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'  # Configure the database URI
+init_db()
 
-app.config['SECRET_KEY'] = 'supersecretkey'
-
-db.init_app(app)  # Initialize the database with the app
-
-bcrypt = Bcrypt(app)
-login_manager = LoginManager(app)
-login_manager.login_view = "login"
-
-@login_manager.user_loader  # Load user for login management
-
-def load_user(user_id):
-    return db.session.get(User, int(user_id))
-
-
-@app.route("/")  # Route for the index page
-
-def index():
-    return render_template("dashboard0.html")
-    
-@app.route("/register", methods=["GET", "POST"])  # Route for user registration
-def register():
-    form = RegisterForm()
-    if form.validate_on_submit():
-        existing_user = User.query.filter_by(username=form.username.data).first()
-        if existing_user:
-            flash("Username already exists. Please choose a different one.", "danger")
-            return redirect(url_for("register"))
-
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        new_user = User(username=form.username.data,email=form.email.data, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        flash("Registration successful! Please log in.", "success")
-        return redirect(url_for("login"))
-
-    return render_template("register.html", form=form)
-
-@app.route("/login", methods=["GET", "POST"])  # Route for user login
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        # Get the user by username
-        user = User.query.filter_by(username=form.username.data).first()
-
-        # If user exists and password is correct
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user)  # Log the user in
-            return redirect(url_for("dashboard"))  # Redirect to the dashboard
-
-        flash("Login failed. Check username and password.", "danger")
-
-    return render_template("login.html", form=form)
-
-
-@app.route("/dashboard")  # Route for the user dashboard
-
-@login_required
-def dashboard():
-    return render_template("dashboard.html", username=current_user.username, email=current_user.email)
-
-@app.route("/logout")  # Route for user logout
-
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for("login"))
-
-@app.route("/users")  # Route for displaying registered users
-
-@login_required
-def users():
-    all_users = User.query.all()
-    return render_template("users.html", users=all_users)
-
-@app.route("/image_form")
-def image_form():
-    return render_template("image_form.html")
-
-
-
-
-@app.route("/predict_image", methods=["POST"])
-def predict_image():
-    if 'image' not in request.files or request.files['image'].filename == '':
-        return jsonify({"error": "No image uploaded or empty filename"}), 400
-
-    image_file = request.files['image']
-    image_path = os.path.join("temp", image_file.filename)
-
-    # Ensure the 'temp' directory exists
-    if not os.path.exists("temp"):
-        os.makedirs("temp")
-
-    image_file.save(image_path)
-
+# -----------------------------
+# HELPER FUNCTIONS
+# -----------------------------
+def add_user(username, email, password):
+    conn = sqlite3.connect("database.db")
+    c = conn.cursor()
+    hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     try:
-        client = Client("Hrigved/skinalyze")
-        result = client.predict(
-            image=handle_file(image_path),
-            api_name="/predict"
-        )
+        c.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", (username, email, hashed_pw))
+        conn.commit()
+        return True
+    except sqlite3.IntegrityError:
+        return False
+    finally:
+        conn.close()
 
-        # Assuming result is a dictionary with a 'prediction' key
-        prediction = result.get('label', 'No prediction available')
-        confidences=result.get('confidences','no confidences')
-        os.remove(image_path)  # Clean up temp file
-        return jsonify({"prediction": prediction,
-                        "confidences":confidences
-                        })
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+def get_user(username):
+    conn = sqlite3.connect("database.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM users WHERE username=?", (username,))
+    user = c.fetchone()
+    conn.close()
+    return user
 
+def get_all_users():
+    conn = sqlite3.connect("database.db")
+    c = conn.cursor()
+    c.execute("SELECT username, email FROM users")
+    users = c.fetchall()
+    conn.close()
+    return users
 
+# -----------------------------
+# APP LOGIC
+# -----------------------------
+st.set_page_config(page_title="Skinalyze", layout="wide")
 
-@app.route("/chatbot_form")
-def chatbot_form():
-    return render_template("chatbot.html")
+# Session state for authentication
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+if "username" not in st.session_state:
+    st.session_state.username = None
 
+st.sidebar.title("🌐 Skinalyze Navigation")
+menu = st.sidebar.radio("Go to", ["Home", "Register", "Login", "Dashboard", "Users", "Image Prediction", "Chatbot", "About Us", "Logout"])
 
-@app.route('/predict', methods=['GET', 'POST'])
-def predict():
+# -----------------------------
+# HOME
+# -----------------------------
+if menu == "Home":
+    st.title("Welcome to Skinalyze")
+    st.write("AI-powered skin disease detection and chatbot assistance.")
 
-    result = None
-    form_data = request.form
-    primary_symptom = form_data.get('primary_symptom', '')
-    location = form_data.get('location', '')
-    associated_symptoms = form_data.get('associated_symptoms', '')
-    duration = form_data.get('duration', '')
-    severity = form_data.get('severity', '')
-    additional_info = form_data.get('additional_info', '')
+# -----------------------------
+# REGISTER
+# -----------------------------
+elif menu == "Register":
+    st.title("Register")
+    username = st.text_input("Username")
+    email = st.text_input("Email")
+    password = st.text_input("Password", type="password")
+    if st.button("Register"):
+        if add_user(username, email, password):
+            st.success("Registration successful! Please login.")
+        else:
+            st.error("Username already exists. Try a different one.")
 
+# -----------------------------
+# LOGIN
+# -----------------------------
+elif menu == "Login":
+    st.title("Login")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    if st.button("Login"):
+        user = get_user(username)
+        if user and bcrypt.checkpw(password.encode('utf-8'), user[3]):
+            st.session_state.logged_in = True
+            st.session_state.username = username
+            st.success(f"Welcome {username}! Go to Dashboard.")
+        else:
+            st.error("Invalid username or password.")
 
+# -----------------------------
+# DASHBOARD
+# -----------------------------
+elif menu == "Dashboard":
+    if st.session_state.logged_in:
+        st.title("User Dashboard")
+        st.write(f"👤 Username: {st.session_state.username}")
+        user = get_user(st.session_state.username)
+        if user:
+            st.write(f"📧 Email: {user[2]}")
+    else:
+        st.warning("Please login first.")
 
-    from gradio_client import Client
+# -----------------------------
+# USERS LIST
+# -----------------------------
+elif menu == "Users":
+    if st.session_state.logged_in:
+        st.title("Registered Users")
+        users = get_all_users()
+        st.table(users)
+    else:
+        st.warning("Please login first.")
 
-    client = Client("Pro-Coder/Skinalyze")
-    result = client.predict(
-        primary_symptom=primary_symptom,
-        location=location,
-        associated_symptoms=associated_symptoms,
-        duration=duration,
-        severity=severity,
-        additional_info=additional_info,
-        api_name="/predict"
-    )
-    return jsonify(result)
+# -----------------------------
+# IMAGE PREDICTION
+# -----------------------------
+elif menu == "Image Prediction":
+    st.title("Skin Disease Detection")
+    uploaded_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
+    if uploaded_file:
+        image_path = os.path.join("temp", uploaded_file.name)
+        if not os.path.exists("temp"):
+            os.makedirs("temp")
+        with open(image_path, "wb") as f:
+            f.write(uploaded_file.read())
 
-@app.route("/about_us")
-def aboutus():
-    return render_template("aboutUs.html")
+        st.image(Image.open(image_path), caption="Uploaded Image", use_column_width=True)
 
-if __name__ == "__main__":  # Run the application
+        if st.button("Predict"):
+            try:
+                client = Client("Hrigved/skinalyze")
+                result = client.predict(
+                    image=handle_file(image_path),
+                    api_name="/predict"
+                )
+                prediction = result.get('label', 'No prediction available')
+                confidences = result.get('confidences', 'No confidences')
+                st.success(f"Prediction: {prediction}")
+                st.json(confidences)
+                os.remove(image_path)
+            except Exception as e:
+                st.error(f"Error: {str(e)}")
 
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)
+# -----------------------------
+# CHATBOT
+# -----------------------------
+elif menu == "Chatbot":
+    st.title("Skinalyze Chatbot")
+    with st.form("chat_form"):
+        primary_symptom = st.text_input("Primary Symptom")
+        location = st.text_input("Location")
+        associated_symptoms = st.text_area("Associated Symptoms")
+        duration = st.text_input("Duration")
+        severity = st.text_input("Severity")
+        additional_info = st.text_area("Additional Info")
+        submitted = st.form_submit_button("Get Advice")
+        if submitted:
+            try:
+                client = Client("Pro-Coder/Skinalyze")
+                result = client.predict(
+                    primary_symptom=primary_symptom,
+                    location=location,
+                    associated_symptoms=associated_symptoms,
+                    duration=duration,
+                    severity=severity,
+                    additional_info=additional_info,
+                    api_name="/predict"
+                )
+                st.json(result)
+            except Exception as e:
+                st.error(f"Error: {str(e)}")
+
+# -----------------------------
+# ABOUT US
+# -----------------------------
+elif menu == "About Us":
+    st.title("About Us")
+    st.write("Skinalyze is an AI-powered skin disease detection and chatbot assistance platform built to help users understand their skin health better.")
+
+# -----------------------------
+# LOGOUT
+# -----------------------------
+elif menu == "Logout":
+    st.session_state.logged_in = False
+    st.session_state.username = None
+    st.success("You have been logged out.")
+
