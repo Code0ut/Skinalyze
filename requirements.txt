@@ -5,7 +5,8 @@ Flask-Login==0.6.3
 Flask-WTF==1.2.2
 gunicorn
 nltk==3.8.1
-torch==2.2.0
+torch==2.7.0
 sentence-transformers==2.5.1
 numpy==1.26.3
 gradio_client
+
