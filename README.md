@@ -1,10 +1,24 @@
-# 🔬 Skinalyze - AI-Powered Skin Analysis Platform
+# 🩺 Arogya Sahayak & Skinalyze - Complete Health Assistant Platform
 
-A modern, beautiful web application for skin disease detection using artificial intelligence, built with Streamlit.
+A comprehensive, multilingual health analysis platform combining skin disease detection, general disease prediction, and maternal health risk assessment using artificial intelligence, built with Streamlit.
 
 ## ✨ Features
 
-### 🔍 **AI Image Analysis**
+### 👩‍⚕️ **Maternal Health Risk Assessment**
+- Vital signs analysis for maternal health risk prediction
+- Input patient data: Age, Blood Pressure, Blood Sugar, Temperature, Heart Rate
+- Risk categorization: Low, Medium, High
+- Ideal for health workers in rural areas
+- Multilingual support for better accessibility
+
+### 🩺 **General Disease Prediction**
+- Symptom-based disease prediction using AI
+- Multi-symptom selection interface
+- Preliminary diagnosis suggestions
+- Comprehensive symptom database
+- Medical disclaimers and safety recommendations
+
+### 🔍 **AI Skin Analysis**
 - Upload skin images for instant AI-powered disease detection
 - High accuracy analysis with confidence scores
 - Support for JPG, JPEG, and PNG formats
@@ -15,6 +29,12 @@ A modern, beautiful web application for skin disease detection using artificial 
 - Personalized medical guidance
 - Comprehensive symptom tracking
 - Professional medical recommendations
+
+### 🌐 **Multilingual Support**
+- Available in English, Hindi (हिन्दी), and Marathi (मराठी)
+- Complete interface translation
+- Rural area accessibility focus
+- Language persistence across sessions
 
 ### 👤 **User Management**
 - Secure user registration and authentication
@@ -71,16 +91,26 @@ A modern, beautiful web application for skin disease detection using artificial 
 - **Pillow** - Image processing
 - **plotly** - Interactive visualizations
 - **pandas** - Data manipulation
+- **joblib** - Model serialization
+- **scikit-learn** - Machine learning models
 
 ## 🏗️ Project Structure
 
 ```
-skinalyze/
+health-assistant/
 ├── app.py              # Main application file
 ├── requirements.txt    # Python dependencies
 ├── README.md          # Project documentation
 ├── database.db        # SQLite database (auto-created)
-└── temp/              # Temporary image storage (auto-created)
+├── temp/              # Temporary image storage (auto-created)
+├── model/             # ML model files directory
+│   ├── maternal_risk_model.joblib      # Maternal health model
+│   ├── disease_model.joblib            # Disease prediction model
+│   ├── disease_label_encoder.joblib    # Disease label encoder
+│   └── README.md                       # Model documentation
+└── database/          # Training data directory
+    ├── Training.csv                    # Symptom-disease dataset
+    └── README.md                       # Data documentation
 ```
 
 ## 🔧 Configuration
@@ -89,26 +119,43 @@ The application uses SQLite database for user management and stores temporary im
 
 ## 🎯 Usage
 
-### 1. **Registration & Login**
+### 1. **Language Selection**
+- Choose your preferred language from the sidebar
+- Available: English, Hindi (हिन्दी), Marathi (मराठी)
+- Language preference persists throughout the session
+
+### 2. **Registration & Login**
 - Create a new account or login with existing credentials
 - Secure password hashing ensures data protection
 
-### 2. **Image Analysis**
-- Navigate to "Image Analysis" page
+### 3. **Maternal Health Risk Assessment**
+- Navigate to "Maternal Health Risk" page
+- Enter patient vitals (Age, BP, Blood Sugar, Temperature, Heart Rate)
+- Click "Assess Risk Level" for AI-powered risk analysis
+- View risk categorization and recommendations
+
+### 4. **Disease Prediction**
+- Access the "Disease Prediction" page
+- Select multiple symptoms from the comprehensive list
+- Click "Predict Disease" for preliminary diagnosis
+- Review AI predictions with medical disclaimers
+
+### 5. **Skin Analysis**
+- Navigate to "Skin Analysis" page
 - Upload a clear image of the skin area
 - Click "Analyze Image" for AI-powered detection
 - View detailed results with confidence scores
 
-### 3. **Medical Chatbot**
-- Access the "AI Chatbot" page
-- Fill in symptom information
+### 6. **Medical Chatbot**
+- Access the "Medical Chatbot" page
+- Fill in comprehensive symptom information
 - Receive personalized medical guidance
 - Get professional recommendations
 
-### 4. **Dashboard**
-- View your analysis history
-- Track personal statistics
-- Access quick actions
+### 7. **Dashboard**
+- View your complete analysis history
+- Track personal health statistics
+- Access quick actions for all features
 - Monitor account information
 
 ## ⚠️ Medical Disclaimer
